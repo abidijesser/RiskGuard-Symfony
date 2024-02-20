@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TemplateController extends AbstractController
 {
-    #[Route('/template', name: 'app_template')]
+    #[Route('/riskguard', name: 'riskguard_app')]
     public function index(): Response
     {
-        return $this->render('template/index.html.twig', [
+        return $this->render('riskguardTemplate/riskguard.html.twig', [
             'controller_name' => 'TemplateController',
         ]);
     }
