@@ -1,1 +1,140 @@
-{{client.nom}}
+{%  extends 'admindashboard/dashboardAdmin.html.twig' %}
+{% block content %}
+
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    {% block title %}
+        Modifier {{client.nom}}
+    {% endblock %} 
+
+    {% block body %}
+        
+        <table class="table table-striped">   
+            <tbody>
+                <tr>
+                    <th >Nom</th>
+                    <td>{{ client.nom }}</td>
+                </tr>
+                <tr>
+                    <th >Prénom</th>
+                    <td>{{ client.prenom }}</td>
+                </tr>
+                <tr>
+                    <th >Email</th>
+                    <td>{{ client.email }}</td>
+                </tr>
+                <tr>
+                    <th >CIN</th>
+                    <td>{{ client.cin }}</td>
+                </tr>
+                <tr>
+                    <th >Télephone</th>
+                    <td>{{ client.telephone }}</td>
+                </tr>
+                <tr>
+                    <th >Adresse domicile</th>
+                    <td>{{ client.adresse_domicile }}</td>
+                </tr>
+                {# <tr>
+                    <th >Nom</th>
+                    <td>{{client.DateDeDeces|date('Y-m-d')}}</td>
+                </tr> #}
+                
+            </tbody>
+
+        </table>
+
+        <div class="d-flex">
+            <!-- Edit button -->
+            <a href="#" class="btn btn-primary" 
+                onclick="openEditModal('{{ client.id }}', '{{ client.nom }}', '{{ client.prenom }}', 
+                '{{ client.email }}','{{ client.cin }}', '{{ client.telephone }}', '{{ client.adresse_domicile }}')">Edit
+            </a>
+
+            <div class="mx-2"></div>
+                              
+            <a href="{{ path('client_delete', {'id': client.id}) }}" class="btn btn-danger">Delete</a>
+                      
+            </div>
+
+            <form id="updateClient" action="{{ path('client_update', {'id': client.id}) }}" method="POST">            
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- Modal content for editing -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modifyTitle">Modifier {{ client.nom }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <div class="col">
+                                        <div class="form-group ">
+                                            <label for="nomInput" class="fs-6" style="margin-bottom:1px">Nom</label>
+                                            <input type="text" name="nom" id="nomInput" class="form-control border-primary" placeholder="Nom">
+                                        </div>
+                                     </div>
+
+                                    <div class="col">                                  
+                                        <div class="form-group ">
+                                            <label for="prenomInput" class="fs-6" style="margin-bottom:1px">Prénom</label>
+                                            <input type="text" name="prenom" id="prenomInput" class="form-control border-primary" placeholder="Prenom">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-1">
+                                    <label for="emailInput" class="fs-6" style="margin-bottom:1px">Email</label>
+                                    <input type="email" name="email" id="emailInput" class="form-control border-primary"  placeholder="exemple@gmail.com">
+                                </div>
+
+                                <div class="form-group mt-1">
+                                    <label for="cinInput" class="fs-6" style="margin-bottom:1px">CIN</label>
+                                    <input type="text" name="cin" id="cinInput" class="form-control border-primary"  placeholder="exemple: 12121212">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="telephoneInput" class="fs-6" style="margin-bottom:1px">Télephone</label>
+                                    <input type="text" name="telephone" id="telephoneInput"  class="form-control border-primary"  placeholder="+216 00 000 000">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="adressedomicileInput" class="fs-6" style="margin-bottom:1px">Adresse domicile</label>
+                                    <input type="text" name="adresse_domicile" id="adressedomicileInput" class="form-control border-primary"  placeholder="1234 Main St">
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="updateClient()">Enregistrer les modifications</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <script>
+                function openEditModal(clientId, clientNom, clientPrenom, clientEmail, clientCin, clientTelephone, clientAdresseDomicile) {
+                        
+                    document.getElementById('nomInput').value = clientNom;
+                    document.getElementById('prenomInput').value = clientPrenom;
+                    document.getElementById('emailInput').value = clientEmail;
+                    document.getElementById('cinInput').value = clientCin;
+                    document.getElementById('telephoneInput').value = clientTelephone;
+                    document.getElementById('adressedomicileInput').value = clientAdresseDomicile;
+                        
+                    var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    modal.show();
+                }
+                
+                function updateClient() {
+                        // Submit the form
+                    document.getElementById('updateClient').submit();
+                }
+            </script>          
+  
+    {% endblock %}
+
+{% endblock %}

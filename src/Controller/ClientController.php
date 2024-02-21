@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
 
+
+
 #[Route('/client')]
 class ClientController extends AbstractController
 {
@@ -47,13 +49,45 @@ class ClientController extends AbstractController
 
 
     #[Route('/update/{id}', name: 'client_update')]
-    public function update(ClientRepository $repository, ManagerRegistry $doctrine, $id): Response
+    public function update(Request $request, ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
         $client= $entityManager->getRepository(Client::class)->find($id);
-        $client->setNom('azazaz');
-        $client->setPrenom('pidev');
-        $client->setCin('00000000');
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id '
+            );
+        }
+
+        $nom = $request->request->get('nom');
+        $prenom = $request->request->get('prenom');
+        $cin = $request->request->get('cin');
+        $email =$request->request->get('email');
+        $telephone = $request->request->get('telephone');
+        $adresse_domicile = $request->request->get('adresse_domicile');
+
+        $client->setNom($nom);
+        $client->setPrenom($prenom);
+        $client->setCin($cin);
+        $client->setEmail($email);
+        $client->setTelephone($telephone);
+        $client->setAdresseDomicile($adresse_domicile);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_client', ['id'=>$id]);
+    }
+
+    #[Route('/delete/{id}', name: 'client_delete')]
+    public function delete(ClientRepository $repository, ManagerRegistry $doctrine, $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $client= $entityManager->getRepository(Client::class)->find($id);
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id '.$id
+            );
+        }
+        $entityManager->remove($client);
         $entityManager->flush();
 
         return $this->redirectToRoute('client_allshow');
@@ -72,13 +106,14 @@ class ClientController extends AbstractController
          return $this->render('client/show.html.twig', ['client' => $client]);
      }
 
-    #[Route('/allclients/bynom', name: 'client_allshow_bynom')]
-    public function showAllClientByNom(ManagerRegistry $doctrine): Response
+    #[Route('/allclients/nom', name: 'client_allshow_bynom')]
+    public function showAllClientByNom(ManagerRegistry $doctrine, $nom): Response
     {
-        $clients = $doctrine->getRepository(Client::class)->findBy(['nom' => 'jjjjjjjj']);
+        $clients = $doctrine->getRepository(Client::class)->findBy(['nom' => $nom]);
 
         return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
     }
+    
 
     #[Route('/allclients', name: 'client_allshow')]
     public function showAllClients(ManagerRegistry $doctrine): Response
