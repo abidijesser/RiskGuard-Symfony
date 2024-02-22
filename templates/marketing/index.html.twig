@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Marketing index{% endblock %}
+
+{% block body %}
+    
+<div class="card">
+                <div class="card-body">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 5%;">Id</th>
+                <th style="width: 15%;">Titre</th>
+                <th style="width: 15%;">Objectif</th>
+                <th style="width: 10%;">Budget</th>
+                <th style="width: 10%;">DateDebut</th>
+                <th style="width: 10%;">DateFin</th>
+                <th style="width: 10%;">Image</th>
+                <th style="width: 25%;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for marketing in marketings %}
+            <tr>
+                <td>{{ marketing.id }}</td>
+                <td>{{ marketing.titre }}</td>
+                <td>{{ marketing.objectif }}</td>
+                <td>{{ marketing.budget }}</td>
+                <td>{{ marketing.dateDebut ? marketing.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ marketing.dateFin ? marketing.dateFin|date('Y-m-d') : '' }}</td>
+                <td><img src="{{ marketing.image }}" alt="Marketing Image" style="max-width: 100px;"></td>
+                <td>
+                    <a href="{{ path('app_marketing_show', {'id': marketing.id}) }}">Show</a>
+                    <a href="{{ path('app_marketing_edit', {'id': marketing.id}) }}">Edit</a>
+                    <a href="{{ path('app_marketing_delete', {'id': marketing.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+{% endblock %}
