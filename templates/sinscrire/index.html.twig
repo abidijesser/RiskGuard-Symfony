@@ -11,12 +11,23 @@
 	
 	<link rel="stylesheet" href="assets/css/stylesignup.css">
 
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+		<!-- Nucleo Icons -->
+		<link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet"/>
+		<link
+		href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
+		<!-- Font Awesome Icons -->
+		<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+		<link
+		href=" {{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
+
 
 	</head>
 	<body>
+	
 	<section class="ftco-section">
-		<div class="container">
-			
+		<div class="container">		
 			<div class="row justify-content-center">
 				<div class="col-md-12">
 					<div class="wrap d-md-flex">
@@ -31,9 +42,9 @@
 									</b>
 								</p>
 							</div>
-			      </div>
+			      		</div>
 						<div class="login-wrap p-4 p-md-5">
-			      	<div class="row justify-content-center py-md-5">
+			      		<div class="row justify-content-center py-md-5">
 			      		<div class="col-lg-9">
 			      			<div class="social-wrap">
 				      			<h3 class="mb-3 text-center" style="padding-bottom: 20px;">Protégeons votre vie, dès aujourd'hui.</h3>
@@ -46,100 +57,463 @@
 				          		<span>or</span>
 				          	</p>
 			          	</div>
-									<form action="#" class="signup-form">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-							      			<label class="label" for="name" >Nom <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control"  >
-							      		</div>
-											</div>
-											
-											<div class="col-md-6">
-												<div class="form-group">
-							      			<label class="label" for="name">Prénom <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control">
-							      		</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-							      			<label class="label" for="email">Address Email <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control">
-							      		</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-						            	<label class="label" for="password">Mot de passe <span style="color: red;">*</span></label>
-						              <input type="password" class="form-control">
-						            </div>
-											</div>
 
+							<form action="{{ path('app_sinscrire_ajouter')}}" class="signup-form" method="POST" id="myform">
+							
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="label" for="nom"style="font-size: 1em; " >Nom <span style="color: red;">*</span></label>
+											<input type="text" class="form-control custom-background" name="nom" id="nom" >
 
-
-											<div class="col-md-12">
-												<div class="form-group">
-							      			<label class="label" for="email">Confirmer mot de passe <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control">
-							      		</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group">
-							      			<label class="label" for="email">Télephone <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control">
-							      		</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group">
-							      			<label class="label" for="email">CIN <span style="color: red;">*</span></label>
-							      			<input type="text" class="form-control">
-							      		</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group">
-							      			<label class="label" for="email">Date de naissance <span style="color: red;">*</span></label>
-							      			<input type="date" class="form-control">
-							      		</div>
-											</div>
-
-
-
-											<div class="col-md-12 my-4">
-												<div class="form-group">
-						            	<div class="w-100">
-							            	<label class="checkbox-wrap checkbox-primary">I agree all statements in terms of service
-														  <input type="checkbox" checked>
-														  <span class="checkmark"></span>
-														</label>
+											<div id="nomError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
 													</div>
-						            </div>
+													<div class="error-message">Le champs Nom est requis.</div>
+												</div>
 											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-						            	<button type="submit" class="btn btn-primary submit p-3" style="width:100%">S'inscrire</button>
-						            </div>
-											</div>
-										</div>
 
-				          </form>
-				          <div class="w-100">
-										<p class="mt-4">j'ai déjà un compte ! <a href="/signin">Se conncter</a></p>
-				          </div>
+										</div>										
+									</div>
+											
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="label" for="prenom"style="font-size: 1em; " >Prénom <span style="color: red;">*</span></label>
+											<input type="text" class="form-control custom-background" name="prenom" id="prenom">
+
+											<div id="prenomError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Prénom est requis.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="label" style="font-size: 1em;" style="font-size: 1em; " for="email">Address Email <span style="color: red;">*</span></label>
+											<input type="email" class="form-control custom-background" name="email" id="email">
+
+											<div id="emailError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Email est requis.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group position-relative">
+											<label class="label" for="password" style="font-size: 1em; " >Mot de passe <span style="color: red; ">*</span></label>
+											<div class="input-group">
+												<input type="password" class="form-control custom-background" id="password" name="password">
+												<div class="input-group-append">
+													<span class="input-group-text password-toggle-icon" onclick="togglePasswordVisibility()">
+														<i class="fas fa-eye-slash" style="width: 20px; height: auto;" ></i>
+													</span>
+												</div>
+											</div>
+
+											<div id="passwordError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Mot de passe est requis.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									
+									<div class="col-md-12">
+										<div class="form-group position-relative">
+											<label class="label" for="confirm-password"style="font-size: 1em; " >Confirmer mot de passe <span style="color: red;">*</span></label>
+											<div class="input-group">
+												<input type="password" class="form-control custom-background" id="confirmpassword" >
+												<div class="input-group-append">
+													<span class="input-group-text password-toggle-iconn " onclick="toggleConfirmPasswordVisibility()">
+														<i class="fas fa-eye-slash" style="width: 20px; height: auto;"></i>
+													</span>
+												</div>
+											</div>
+
+											<div id="confirmpasswordError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Confirmer mot de passe est requis.</div>
+												</div>
+											</div>
+
+											<div id="passwordMatchError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">le mot de passe ne correspond pas.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="label" for="telephone"style="font-size: 1em; " >Télephone <span style="color: red;">*</span></label>
+											<input type="text" class="form-control custom-background" id="telephone" name="telephone">
+
+											<div id="telephoneError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Télephone est requis.</div>
+												</div>
+											</div>
+
+											<div id="telephoneFormatError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Votre télephone doit contenir exactement <b>8 </b> chiffres. </div>
+												</div>
+											</div>
+										
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="label" for="cin"style="font-size: 1em; " >CIN <span style="color: red;">*</span></label>
+											<input type="text" class="form-control custom-background" id="cin" name="cin">
+
+											<div id="cinError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs CIN est requis.</div>
+												</div>
+											</div>
+
+											<div id="cinFormatError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Votre CIN doit contenir exactement <b>8</b> chiffres.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="label" for="adresse_domicile"style="font-size: 1em; " >Adresse domicile<span style="color: red;">*</span></label>
+											<input type="text" class="form-control custom-background" id="adresse_domicile" name="adresse_domicile">
+
+											<div id="domicileError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Adresse domicile est requis.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="label" for="date_de_naissance"style="font-size: 1em; " >Date de naissance <span style="color: red;">*</span></label>
+											<input type="date" class="form-control custom-background" id="date_de_naissance">
+
+											<div id="naissanceError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;"> 
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Le champs Date de naissance est requis.</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-md-12 my-4">
+										<div class="form-group">
+						        			<div class="w-100">
+							        			<label class="checkbox-wrap checkbox-primary">I agree all statements in terms of service
+													<input type="checkbox" checked>
+													<span class="checkmark"></span>
+												</label>
+											</div>
+						    			</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+						        			<button type="submit" class="btn p-3" 
+											style="width:100%; color:white; font-size: 1.2em;" 
+											>S'inscrire</button>
+						   				</div>
+									</div>
+
+								</div>
+				          	</form>
+							<div class="w-100">
+									<p class="mt-4">j'ai déjà un compte ! <a href="/signin">Se conncter</a></p>
+							</div>
 			      		</div>
 			      	</div>
 		        </div>
-		      </div>
-				</div>
-			</div>
+		    </div>
 		</div>
+	</div>
+	</div>
 	</section>
 
 	<script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+  	<script src="js/popper.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+  	<script src="js/main.js"></script>
+
+  	<style>
+		.password-toggle-icon, .password-toggle-iconn {
+			cursor: pointer;
+		}					
+		.custom-background {
+        	background-color: #D7EBF2; /* Remplacez #f0f0f0 par la couleur de fond souhaitée */
+    	}	
+		.btn {
+			background-color: #0A60A4;
+			letter-spacing: 0.8px;
+		}			
+
+		.icon-container {
+			margin-right: 5px;
+			width: 20px; /* Taille de l'icône */
+			height: 20px; /* Taille de l'icône */
+			background-color: red; /* Couleur du cercle */
+			border-radius: 50%; /* Pour rendre le conteneur rond */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}		
+
+		.error-container {
+			display: flex;
+			align-items: center;
+			background-color:#FFDEDE;
+		}		
+
+		.error-message {
+			color: red;
+			font-size: 13px;
+			margin-left: 2px;
+		}		
+
+	</style>
+
+    <script>
+
+		function submitForm() {
+			document.getElementById('myform').submit();
+		}
+
+		function toggleConfirmPasswordVisibility() {
+			var confirmPasswordInput = document.getElementById('confirmpassword');
+			var icon = document.querySelector('.password-toggle-iconn i ');
+
+			if (confirmPasswordInput.type === "password") {
+				confirmPasswordInput.type = "text";
+				icon.classList.remove('fa-eye-slash');
+				icon.classList.add('fa-eye');
+			} else {
+				confirmPasswordInput.type = "password";
+				icon.classList.remove('fa-eye');
+				icon.classList.add('fa-eye-slash');
+			}
+		}
+
+		function togglePasswordVisibility() {
+			var passwordInput = document.getElementById('password');
+			var icon = document.querySelector('.password-toggle-icon i');
+
+			if (passwordInput.type === "password") {
+				passwordInput.type = "text";
+				icon.classList.remove('fa-eye-slash');
+				icon.classList.add('fa-eye');
+			} else {
+				passwordInput.type = "password";
+				icon.classList.remove('fa-eye');
+				icon.classList.add('fa-eye-slash');
+			}
+		}
+
+		let myForm= document.getElementById('myform');
+		let myRegex = /^[a-zA-Z-\s]+$/ ;
+		let numberRegex = /^\d{8}$/;
+
+		myForm.addEventListener('submit', function(e) {
+			let nomInput= document.getElementById('nom');
+			let prenomInput=document.getElementById("prenom");
+			let emailInput=document.getElementById("email");
+			let passwordInput=document.getElementById("password");
+			let confirmpasswordInput=document.getElementById("confirmpassword");
+			let telephoneInput=document.getElementById("telephone");
+			let cinInput=document.getElementById("cin");
+			let domicileInput=document.getElementById("adresse_domicile");
+			let naissanceInput=document.getElementById("date_de_naissance");
+
+			if( nomInput.value.trim()==="") {
+				let nomError= document.getElementById('nomError');
+				nomError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+
+			if( nomInput.value.trim()!=="") {
+				let nomError= document.getElementById('nomError');
+				nomError.style.display = 'none'; 
+				
+			} 
+
+			if( prenomInput.value.trim()==="") {
+				let prenomError= document.getElementById('prenomError');
+				prenomError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+			if( prenomInput.value.trim()!=="") {
+				let prenomError= document.getElementById('prenomError');
+				prenomError.style.display = 'none'; 
+				
+			} 
+
+			if( emailInput.value.trim()=="") {
+				let emailError= document.getElementById('emailError');
+				emailError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+
+			if( emailInput.value.trim()!=="") {
+				let emailError= document.getElementById('emailError');
+				emailError.style.display = 'none'; 
+				
+			} 
+
+			if( passwordInput.value.trim()==="") {
+				let passwordError= document.getElementById('passwordError');
+				passwordError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+
+			if( passwordInput.value.trim()!=="") {
+				let passwordError= document.getElementById('passwordError');
+				passwordError.style.display = 'none'; 
+				
+			} 
+
+			if( confirmpasswordInput.value.trim()==="") {
+				let confirmpasswordError= document.getElementById('confirmpasswordError');
+				confirmpasswordError.style.display = 'block'; 
+				e.preventDefault();
+			} else if (passwordInput.value !== confirmpasswordInput.value) {
+				let passwordMatchError = document.getElementById('passwordMatchError');
+				passwordMatchError.style.display = 'block';
+				e.preventDefault();
+			}
+
+			if( confirmpasswordInput.value.trim()!=="") {
+				let passwordError= document.getElementById('confirmpasswordError');
+				passwordError.style.display = 'none'; 
+				
+			} 
+
+			if (passwordInput.value == confirmpasswordInput.value) {
+				let passwordMatchError = document.getElementById('passwordMatchError');
+				passwordMatchError.style.display = 'none';
+				
+			}
+
+			if( telephoneInput.value.trim()==="") {
+				let telephoneError= document.getElementById('telephoneError');
+				telephoneError.style.display = 'block'; 
+				e.preventDefault();
+			} else if (!numberRegex.test(telephoneInput.value)) {
+				let telephoneFormatError = document.getElementById('telephoneFormatError');
+				telephoneFormatError.style.display = 'block'; 
+				e.preventDefault();
+			} else {
+				let telephoneFormatError= document.getElementById('telephoneFormatError');
+				telephoneFormatError.style.display = 'none'; 				
+			}
+
+			if( telephoneInput.value.trim()!=="") {
+				let telephoneError= document.getElementById('telephoneError');
+				telephoneError.style.display = 'none'; 
+				
+			}
+
+			if( cinInput.value.trim()==="") {
+				let cinError= document.getElementById('cinError');
+				cinError.style.display = 'block'; 
+				e.preventDefault();
+			} else if (!numberRegex.test(cinInput.value)) {
+				let cinFormatError = document.getElementById('cinFormatError');
+				cinFormatError.style.display = 'block'; 
+				e.preventDefault();
+			} else {
+				let cinFormatError= document.getElementById('cinFormatError');
+				cinFormatError.style.display = 'none'; 				
+			}
+
+			if( cinInput.value.trim()!=="") {
+				let cinError= document.getElementById('cinError');
+				cinError.style.display = 'none'; 
+				
+			} 
+
+			if( domicileInput.value.trim()==="") {
+				let domicileError= document.getElementById('domicileError');
+				domicileError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+
+			if( domicileInput.value.trim()!=="") {
+				let domicileError= document.getElementById('domicileError');
+				domicileError.style.display = 'none'; 
+				
+			} 
+
+
+			if( naissanceInput.value.trim()==="") {
+				let naissanceError= document.getElementById('naissanceError');
+				naissanceError.style.display = 'block'; 
+				e.preventDefault();
+			} 
+
+			if( naissanceInput.value.trim()!=="") {
+				let naissanceError= document.getElementById('naissanceError');
+				naissanceError.style.display = 'none'; 
+				
+			} 
+		});
+	</script>
 
 	</body>
 </html>

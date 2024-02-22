@@ -10,54 +10,64 @@
     {% endblock %} 
 
     {% block body %}
+
+    <nav aria-label="breadcrumb" >
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('client_allshow') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{client.nom | capitalize}} {{client.prenom | capitalize}}</li>
+        </ol>
+    </nav>
         
-        <table class="table table-striped">   
+        <table class="table table-striped  " style="margin-top:40px; padding-right:10px; border-radius:10px; border-collapse: separate; border-spacing: 0; overflow: hidden;">   
             <tbody>
                 <tr>
-                    <th >Nom</th>
+                    <th >Nom:</th>
                     <td>{{ client.nom }}</td>
                 </tr>
                 <tr>
-                    <th >Prénom</th>
+                    <th >Prénom:</th>
                     <td>{{ client.prenom }}</td>
                 </tr>
                 <tr>
-                    <th >Email</th>
+                    <th >Email:</th>
                     <td>{{ client.email }}</td>
                 </tr>
                 <tr>
-                    <th >CIN</th>
+                    <th >CIN:</th>
                     <td>{{ client.cin }}</td>
                 </tr>
                 <tr>
-                    <th >Télephone</th>
+                    <th >Télephone:</th>
                     <td>{{ client.telephone }}</td>
                 </tr>
                 <tr>
-                    <th >Adresse domicile</th>
+                    <th >Adresse domicile:</th>
                     <td>{{ client.adresse_domicile }}</td>
                 </tr>
-                {# <tr>
-                    <th >Nom</th>
-                    <td>{{client.DateDeDeces|date('Y-m-d')}}</td>
-                </tr> #}
+                 {# <tr>
+                    <th >Date de naissance:</th>
+                    <td>{{client.date_de_naissance|date('Y-m-d')}}</td>
+                </tr>  #}
                 
             </tbody>
 
         </table>
 
-        <div class="d-flex">
+        <div class="d-flex ">
             <!-- Edit button -->
-            <a href="#" class="btn btn-primary" 
+            <a href="#" class="btn btn-primary fs-5 w-50 " 
                 onclick="openEditModal('{{ client.id }}', '{{ client.nom }}', '{{ client.prenom }}', 
                 '{{ client.email }}','{{ client.cin }}', '{{ client.telephone }}', '{{ client.adresse_domicile }}')">Edit
             </a>
 
             <div class="mx-2"></div>
-                              
-            <a href="{{ path('client_delete', {'id': client.id}) }}" class="btn btn-danger">Delete</a>
+
+            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class=" fs-5 w-50 btn btn-danger d-flex justify-content-center align-items-center rounded mr-5" style="width: 5px; height: 100%;">
+				delete
+			</button>
+                            
                       
-            </div>
+        </div>
 
             <form id="updateClient" action="{{ path('client_update', {'id': client.id}) }}" method="POST">            
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,10 +106,12 @@
                                     <label for="cinInput" class="fs-6" style="margin-bottom:1px">CIN</label>
                                     <input type="text" name="cin" id="cinInput" class="form-control border-primary"  placeholder="exemple: 12121212">
                                 </div>
+
                                 <div class="form-group mt-1">
                                     <label for="telephoneInput" class="fs-6" style="margin-bottom:1px">Télephone</label>
                                     <input type="text" name="telephone" id="telephoneInput"  class="form-control border-primary"  placeholder="+216 00 000 000">
                                 </div>
+
                                 <div class="form-group mt-1">
                                     <label for="adressedomicileInput" class="fs-6" style="margin-bottom:1px">Adresse domicile</label>
                                     <input type="text" name="adresse_domicile" id="adressedomicileInput" class="form-control border-primary"  placeholder="1234 Main St">
@@ -114,6 +126,26 @@
                     </div>
                 </div>
             </form>
+
+            <!-- Button delete -->
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header" style="background-color: #FADBD8 ">
+								<h5 class="modal-title" id="staticBackdropLabel">Suppression</h5>
+								<button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								etes vous sûr de supprimer {{client.nom | capitalize}} ?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+								<a href="{{ path('client_delete', {'id': client.id}) }}" type="button" class="btn btn-danger" >Supprimer</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
             <script>
                 function openEditModal(clientId, clientNom, clientPrenom, clientEmail, clientCin, clientTelephone, clientAdresseDomicile) {

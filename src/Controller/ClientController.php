@@ -26,7 +26,7 @@ class ClientController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_client_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_client_new')]
     public function new(ManagerRegistry $doctrine, Request $req): Response
     {
         $em= $doctrine->getManager();
@@ -105,24 +105,31 @@ class ClientController extends AbstractController
          }
          return $this->render('client/show.html.twig', ['client' => $client]);
      }
-
-    #[Route('/allclients/nom', name: 'client_allshow_bynom')]
-    public function showAllClientByNom(ManagerRegistry $doctrine, $nom): Response
-    {
-        $clients = $doctrine->getRepository(Client::class)->findBy(['nom' => $nom]);
-
-        return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
-    }
     
 
     #[Route('/allclients', name: 'client_allshow')]
     public function showAllClients(ManagerRegistry $doctrine): Response
     {
-        $clients = $doctrine->getRepository(Client::class)->findBy([], []);
+        $clients = $doctrine->getRepository(Client::class)->findAll();
 
         return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
     }
 
+    #[Route('/allclients/{bynom}', name: 'client_allshow_bynom')]
+    public function showAllClientByNom(ManagerRegistry $doctrine, $bynom): Response
+    {
+        $clients = $doctrine->getRepository(Client::class)->findBy([], [$bynom => 'ASC']);
+
+        return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
+    }
+    
+    #[Route('/ajouterclient', name: 'client_add')]
+    public function addClient(ManagerRegistry $doctrine): Response
+    {
+        return $this->render('admindashboard/ajoutClient.html.twig');
+    }
+
+    
 
     // #[Route('/{id}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
     // public function edit(Request $request, Client $client, EntityManagerInterface $entityManager, $id): Response

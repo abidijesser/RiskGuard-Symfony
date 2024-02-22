@@ -14,6 +14,14 @@ body {
   height: 100%;
 }
 
+/* CSS pour le bouton personnalisé */
+.bouton-personnalise:hover {
+  border: 5px solid white !important; /* Change la bordure au survol */
+}
+
+
+
+
 .floatleft {
   float: left;
 }

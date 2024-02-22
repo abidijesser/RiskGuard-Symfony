@@ -31,7 +31,7 @@
 		<aside class=" sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
 			<div class="sidenav-header">
 				<i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-				<a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+				<a class="navbar-brand m-0"  target="_blank">
 					<img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100 width=100 height=380" alt="main_logo">
 					<span class="ms-1 font-weight-bold">RiskGuard</span>
 				</a>
@@ -39,73 +39,86 @@
 			<hr class="horizontal dark mt-0">
 			<div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
 				<ul class="navbar-nav">
+
+
 					<li class="nav-item">
 						<a class="nav-link active" href="./indexback.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+								<i class="fas fa-user text-primary text-sm opacity-10 mb-2"></i>
 							</div>
-							<span class="nav-link-text ms-1">Home</span>
+							<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Clients</span>
 						</a>
 					</li>
+
+					<li class="nav-item mt-2">
+						<a class="nav-link active" href="{{path('client_add')}}">
+							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="fas fa-plus text-primary text-sm opacity-10 mb-2"></i>
+							</div>
+							<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Ajouter un client</span>
+						</a>
+					</li>
+
+					
 					<li class="nav-item">
 						<a class="nav-link" href="./pages/User.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+								{# <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i> #}
 							</div>
-							<span class="nav-link-text ms-1">User</span>
+							<span class="nav-link-text ms-1">  </span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="./pages/Employes.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+								{# <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i> #}
 							</div>
-							<span class="nav-link-text ms-1">Employes</span>
+							<span class="nav-link-text ms-1">  </span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="./pages/Reclamations.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
 							</div>
-							<span class="nav-link-text ms-1">Reclamations</span>
+							<span class="nav-link-text ms-1">  </span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="./pages/Reponses.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
 							</div>
-							<span class="nav-link-text ms-1">Reponses</span>
+							<span class="nav-link-text ms-1">  </span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="./pages/Marketing.html">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								<i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
 							</div>
-							<span class="nav-link-text ms-1">Marketing</span>
+							<span class="nav-link-text ms-1">  </span>
 						</a>
 					</li>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link " href="./pages/Finances.html">
 						<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="ni ni-app text-info text-sm opacity-10"></i>
+							{# <i class="ni ni-app text-info text-sm opacity-10"></i> #}
 						</div>
-						<span class="nav-link-text ms-1">Finances</span>
+						<span class="nav-link-text ms-1">  </span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link " href="./pages/Assurances.html">
 						<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="ni ni-app text-info text-sm opacity-10"></i>
+							{# <i class="ni ni-app text-info text-sm opacity-10"></i> #}
 						</div>
-						<span class="nav-link-text ms-1">Assurances</span>
+						<span class="nav-link-text ms-1">  </span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6"></h6>
 				</li>
 			</ul>
 		</div>
@@ -117,10 +130,10 @@ class="main-content position-relative border-radius-lg ">
 		<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 			<div class="ms-md-auto pe-md-3 d-flex align-items-center">
 				<div class="input-group">
-					<span class="input-group-text text-body">
-						<i class="fas fa-search" aria-hidden="true"></i>
-					</span>
 					<input type="text" class="form-control" placeholder="Type here...">
+					<span class="input-group-text bg-white">
+						<i class="fas fa-search text-primary" aria-hidden="true"></i>
+					</span>
 				</div>
 			</div>
 			<ul class="navbar-nav  justify-content-end">
@@ -153,7 +166,7 @@ class="main-content position-relative border-radius-lg ">
 
 
 	<div class="container-fluid py-4">
-		<div style="width:100%; height:100%; background-color: rgb(255, 255, 255); margin-top:20px; border-radius: 5px; ">
+		<div style="width:100%; height:500px; background-color: rgb(255, 255, 255); margin-top:20px; border-radius: 5px; padding-right:10px; padding-bottom: ">
 			<div style="padding-left: 10px; ">
 				<div style="padding-top: 10px; ">
 					{% block body %}
@@ -173,32 +186,53 @@ class="main-content position-relative border-radius-lg ">
 							}
 						</script>
 
-						<form>
+						<form id="sortForm">
 						<div class="d-flex align-items-center justify-content-center">
 							<select 
 							
-								class="form-select " 
+								class="form-select mb-3" 
 								aria-label="Default select example" 
-								style="width: 30%; margin-left: 665px;" 
+								style="width: 20%; margin-left: 68%; border: 1px solid #007bff" 
 								required
+								id="sortSelect"
 								
 								value="{sortby}">
 								<option selected>trier avec . . .</option>
-								<option value="Affecté">Nom</option>
-								<option value="NonAffecté">Prénom</option>
+								<option value="nom">Nom</option>
+								<option value="prenom">Prénom</option>
 								<option value="Annulé">Annulé . . .</option>
 							</select>
 							<div class="mx-2"></div>
 							<button type="button" 
-								onClick="" 
-								class="btn btn-primary " 
-								style="height: 36px; width: 80px;">Trier
+								class="btn btn-primary ml-2" 
+								style="height: 36px; width: 80px;"
+								onclick="submitSortForm()">
+								Trier
 							</button>
 						</div>
 					</form>
 
+					<script>
+						function submitSortForm() {
+							const selectedOption = document.getElementById('sortSelect').value;
+							const form = document.getElementById('sortForm');
 
-						<table class="table table-bordered">
+							if(selectedOption == "Annulé" ){
+								form.action = '/client/allclients/';
+								form.submit();
+
+							} else if (selectedOption == "trier avec . . ."){
+								e.preventDefault(e);
+
+							} else {
+							form.action = '/client/allclients/' + selectedOption;
+							form.submit();
+							}
+						}
+					</script>
+
+
+						<table class="table table-bordered table-responsive table-hover" style="padding-right:5px; overflow: hidden; padding-right:10px; border-radius:10px; ">
 							<thead>
 								<tr class="bg-primary text-center text-white">
 									<th scope="col" class="col-md-1">Nom</th>
@@ -207,23 +241,23 @@ class="main-content position-relative border-radius-lg ">
 									<th scope="col" class="col-md-1">Email</th>
 									<th scope="col">Télephone</th>
 									<th scope="col">Adresse domicile</th>
-									<th scope="col">Actions</th>
+									
 								</tr>
 							</thead>
 
 							<tbody class=" text-center">
 								{% for client in clients %}
 									<tr>
-										<td><a href="{{ path('show_client', {id: client.id}) }}">{{client.nom}}</a> </td>							
-										<td class="col-md-2">{{ client.prenom}}</td>
-										<td class="col-md-1">{{client.cin}}</td>
-										<td>{{client.email}}</td>
-										<td>{{client.telephone}}</td>
-										<td>{{ client.adresse_domicile }}</td>
+										<td><a href="{{ path('show_client', {id: client.id}) }}"> {{client.nom}}</a> </td>							
+										<td class="col-md-2" ><a href="{{ path('show_client', {id: client.id}) }}"> {{ client.prenom}}</td>
+										<td class="col-md-2"> <a href="{{ path('show_client', {id: client.id}) }}">{{client.cin}}</td>
+										<td><a href="{{ path('show_client', {id: client.id}) }}"> {{client.email}}</td>
+										<td class="col-md-2"><a href="{{ path('show_client', {id: client.id}) }}"> {{client.telephone}}</td>
+										<td><a href="{{ path('show_client', {id: client.id}) }}"> {{ client.adresse_domicile }}</td>
 										<!-- an iput to get the id of the specific client -->
 										<input type="hidden" id="clientIdInput">
 
-										<td>
+										{# <td>
 											<div class="d-flex" style="width: 20px; height: 100%;">
 												<a  href="{{ path('show_client', {id: client.id}) }}" type="button"  class="btn btn-primary btn-edit d-flex justify-content-center align-items-center rounded" style="width: 5px; height: 100%;">
 													<i class="fas fa-pen"></i>
@@ -237,7 +271,7 @@ class="main-content position-relative border-radius-lg ">
 												</button>
 
 											</div>
-										</td>
+										</td> #}
 									</tr>
 								{% endfor %}
 							</tbody>						
@@ -311,7 +345,7 @@ class="main-content position-relative border-radius-lg ">
 								</div>
 							</div>
 						</div>
-
+						
 					{% endblock %}
 				</div>
 			</div>
