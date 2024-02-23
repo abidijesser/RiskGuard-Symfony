@@ -8,8 +8,20 @@
     {% block title %}
         Ajouter client
     {% endblock %} 
+    {% block Clients  %}
+        <li class="nav-item">
+			<a class="nav-link active" href=" {{ path('client_allshow') }} " >
+				<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+					<i class="fas fa-user text-primary text-sm opacity-10 mb-2"></i>
+				</div>
+				<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Clients</span>
+			</a>
+		</li>
+    {% endblock %}
 
     {% block body %}
+
+    
 
     <nav aria-label="breadcrumb" >
         <ol class="breadcrumb">
