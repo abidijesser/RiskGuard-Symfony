@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>RiskGuard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: eBusiness
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+
+
+
+  <!-- ======= Header ======= -->
+
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo">
+        <h1><a href="index.html"><span>Risk</span>Guard</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/about/1.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="\landingpage">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">A Propos</a></li>
+          <li><a class="nav-link scrollto" href="#services">Nos Services</a></li>
+          <li><a class="nav-link scrollto" href="#team">Notre Equipe</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        #insuranceForm {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        label {
+            color: #666;
+            cursor: pointer;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        button[type="submit"], .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        button[type="submit"]:hover, .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<br><br><br><br><br>
+    <form id="insuranceForm">
+        <h2>Choisissez le type de constat :</h2>
+        <input type="radio" id="type1" name="type" required value="Assurance vie">
+        <label for="type1">Assurance vie</label><br>
+        <input type="radio" id="type2" name="type" value="Assurance véhicule">
+        <label for="type2">Assurance véhicule</label><br>
+        <p>Vous avez choisi le type d'assurance : <span id="resultat"></span></p>
+        <button type="submit">Ajouter constat</button>
+        
+    </form>
+
+  
+
+    <script>
+    // Function to update the selected value
+    function updateResult() {
+        var selectedValue = document.querySelector('input[name="type"]:checked');
+        if (selectedValue) {
+            document.getElementById('resultat').innerText = selectedValue.value;
+        }
+    }
+
+    // Event listener to update result on radio button change
+    document.querySelectorAll('input[type=radio][name=type]').forEach(function(radio) {
+        radio.addEventListener('change', updateResult);
+    });
+
+    
+
+        // Event listener for form submission
+        document.getElementById('insuranceForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get the selected value
+            var selectedValue = document.querySelector('input[name="type"]:checked').value;
+
+            // Redirect to the corresponding template based on the selected value
+            if (selectedValue === 'Assurance vie') {
+                window.location.href = "{{ path('app_constat_vie') }}"; // Replace 'app_constatvie' with your route name for the Assurance vie template
+            } 
+            else if (selectedValue === 'Assurance véhicule') {
+                window.location.href = "{{ path('app_constat_vehicule') }}"; // Replace 'app_constatvehicule' with your route name for the Assurance véhicule template
+            }
+         else {
+            // Handle the case where no radio button is selected
+            alert("Please select an option.");
+        }
+        });
+    
+
+</script> 
+
+
+
+<br><br><br><br><br>
+  <div > 
+   
+    <img  style=" max-width: 150px;  height: auto;" src="../assets/img/about/1.png" alt="logo" class="img-fluid logo">
+  </div>
+</a></p>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
