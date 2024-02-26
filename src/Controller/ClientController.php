@@ -115,10 +115,10 @@ class ClientController extends AbstractController
         return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
     }
 
-    #[Route('/allclients/{bynom}', name: 'client_allshow_bynom')]
-    public function showAllClientByNom(ManagerRegistry $doctrine, $bynom): Response
+    #[Route('/allclients/{bycritere}', name: 'client_allshow_bynom')]
+    public function showAllClientByCritere(ManagerRegistry $doctrine, $bycritere): Response
     {
-        $clients = $doctrine->getRepository(Client::class)->findBy([], [$bynom => 'ASC']);
+        $clients = $doctrine->getRepository(Client::class)->findBy([], [$bycritere => 'ASC']);
 
         return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
     }

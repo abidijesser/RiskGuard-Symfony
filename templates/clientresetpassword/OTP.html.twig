@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP validation</title>
+    <link href="{{ asset('assets/css/otp.css') }}" rel="stylesheet"/>
+</head>
+<body class="bg-gray">
+<div class="container">
+
+    <form class="otp-Form" id="otpForm" action="{{ path('app_verifyotp') }}" method="POST">
+
+        <span class="mainHeading">Code de validation</span>
+        <p class="otpSubheading">Entrez le code de vérification que nous avons envoyé à :</p>
+        <p class="otpSubheading">{{ email }} : {{ OTP }}</p>
+        <div class="inputContainer">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input1" name="otp1" />
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input2" name="otp2" />
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input3" name="otp3" />
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input4" name="otp4" />
+        </div>
+
+        <button class="verifyButton" type="submit" onclick="getOTP()"> <span class="ver"> Vérifier</span> </button>
+
+        <div class="resendContainer">
+            <p class="resendNote ">Vous n'avez pas reçu le code? <span class="resendBtn">Renvoyer</span> </p>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    let otp1=document.getElementById("otp-input1") ;
+    let otp2=document.getElementById("otp-input2") ;
+    let otp3=document.getElementById("otp-input3") ;
+    let otp4=document.getElementById("otp-input4") ;
+
+    function getOTP() {
+        console.log(typeof {{ OTP }})
+        console.log(typeof otp1.value);
+        console.log(typeof otp2.value);
+        console.log(typeof otp3.value);
+        console.log(typeof otp4.value);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var otpForm = document.getElementById('otpForm');
+        var inputs = otpForm.querySelectorAll('.otp-input');
+
+        otpForm.addEventListener('submit', function(event) {
+            var isInputMissing = false;
+
+            inputs.forEach(function(input) {
+                if (!input.value) {
+                    isInputMissing = true;
+                }
+            });
+
+            if (isInputMissing) {
+                // Afficher la popover ici
+                var popoverTriggerEl = document.querySelector('.verifyButton');
+                var popover = new bootstrap.Popover(popoverTriggerEl, {
+                    customClass: 'custom-popover',
+                    title: 'Custom popover',
+                    content: 'Les champs de saisie sont requis.'
+                });
+
+                // Empêcher la soumission du formulaire
+                event.preventDefault();
+            }
+        });
+
+        inputs.forEach(function(input) {
+            input.addEventListener('input', function() {
+                if (this.value.length >= this.maxLength) {
+                    var index = Array.prototype.indexOf.call(inputs, this);
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var inputs = document.querySelectorAll('.otp-input');
+
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('input', function() {
+                if (this.value.length >= this.maxLength) {
+                    var index = Array.prototype.indexOf.call(inputs, this);
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

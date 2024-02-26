@@ -115,6 +115,7 @@
 									<div class="col-md-12">
 										<div class="form-group position-relative">
 											<label class="label" for="password" style="font-size: 1em; " >Mot de passe <span style="color: red; ">*</span></label>
+
 											<div class="input-group">
 												<input type="password" class="form-control custom-background" id="password" name="password">
 												<div class="input-group-append">
@@ -296,9 +297,10 @@
   	<style>
 		.password-toggle-icon, .password-toggle-iconn {
 			cursor: pointer;
+
 		}					
 		.custom-background {
-        	background-color: #D7EBF2; /* Remplacez #f0f0f0 par la couleur de fond souhaitée */
+        	background-color: #D7EBF2;
     	}	
 		.btn {
 			background-color: #0A60A4;
@@ -331,7 +333,6 @@
 	</style>
 
     <script>
-
 		function submitForm() {
 			document.getElementById('myform').submit();
 		}
@@ -390,7 +391,6 @@
 			if( nomInput.value.trim()!=="") {
 				let nomError= document.getElementById('nomError');
 				nomError.style.display = 'none'; 
-				
 			} 
 
 			if( prenomInput.value.trim()==="") {
