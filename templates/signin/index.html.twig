@@ -1,81 +1,194 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<head>
+		<title>Login</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/styleSignIn.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+		<link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet"/>
+		<link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
+		<link href=" {{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
+		<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+		</head>
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="assets/css/styleSignIn.css">
-    
-
-	</head>
 	<body>
 	<section class="ftco-section">
+
 		<div class="container">
-		
-			
 			<div class="row justify-content-center">
 				<div class="col-md-12 col-lg-10">
 					<div class="wrap d-md-flex">
-						<div class="img" style="background-image: url(assets/img/signinImage3.jpg);">
-			      </div>
+						<div class="img" style="background-image: url( {{ asset('assets/img/signinImage3.jpg') }} );"> </div>
+
 						<div class="login-wrap p-4 p-md-5">
-			      	<div class="d-flex">
-			      		<div class="w-100">
-			      			<h3 class="mb-6">Se connecter </h3>
-			      		</div>
+			      			<div class="d-flex">
+			      				<div class="w-100">
+			      					<h3 class="mb-6">Se connecter </h3>
+			      				</div>
 								<div class="w-100">
 									<p class="social-media d-flex justify-content-end">
 										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
 										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
 									</p>
 								</div>
-			      	</div>
-							<form action="#" class="signin-form">
-			      		<div class="form-group mb-3">
-			      			<label class="label" for="name">Adresse Email</label>
-			      			<input type="text" class="form-control" placeholder="Votre email" required>
-			      		</div>
-		            <div class="form-group mb-3">
-		            	<label class="label" for="password">Mot de passe</label>
-		              <input type="password" class="form-control" placeholder="Votre mot de passe" required>
-		            </div>
+			      			</div>
 
-					
-		            <div class="form-group">
-		            	<button type="submit" 
-						class="form-control  btn-primary rounded submit px-3">Se connecter</button>
-		            </div>
-		            <div class="form-group d-md-flex">
-		            	<div class="w-50 text-left">
-			            	<label class="checkbox-wrap  mb-0" style="color:blue ;">Ne m'oubliez pas
-									  <input type="checkbox" >
-									  <span class="checkmark"></span>
+							<form id="myform" action= " {{ path('app_signinTo') }}" class="signin-form" method="POST">
+								<div class="form-group ">
+									<label class="label" for="email">Adresse Email</label>
+									<input type="text" id="email" name="email" class="form-control" style="border: 0.5px solid darkblue" placeholder="Votre email" >
+								</div>
+
+								<div id="emailError" style="border: 1px solid red; border-radius:3px; padding-left:4px; padding:3px; display: none;">
+									<div class="error-container">
+										<div class="icon-container">
+											<i class="fas fa-exclamation fa-xs" style="color: white;"></i>
+										</div>
+										<div class="error-message">Vous veuillez entrez votre <b>Email</b> .</div>
+									</div>
+								</div>
+
+								<div id="emailRegex" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;">
+									<div class="error-container">
+										<div class="icon-container">
+											<i id=" icon"class="fas fa-exclamation fa-xs" style="color: white;"></i>
+										</div>
+										<div class="error-message">Vous euillez saisir une adresse <b>email</b> valide.</div>
+									</div>
+								</div>
+
+								{% if emailError %}
+									<div class="alert alert-danger">
+										{{ emailError }}
+									</div>
+								{% endif %}
+
+								<div class="form-group ">
+									<label class="label" for="password">Mot de passe</label>
+									<input type="password" id="password" name="password" style="border: 0.5px solid darkblue" class="form-control" placeholder="Votre mot de passe" >
+								</div>
+
+								<div id="passwordError" class="mb-4" style="border: 1px solid red; border-radius: 3px; padding-left: 4px; padding: 3px; display: none;">
+									<div class="error-container">
+										<div class="icon-container">
+											<i class="fas fa-exclamation fa-xs" style="color: white;"></i>
+										</div>
+										<div class="error-message">Vous veuillez entrer votre <b>Mot de passe</b> .</div>
+									</div>
+								</div>
+
+								{% if passwordError %}
+									<div class="alert alert-danger">
+										{{ passwordError }}
+									</div>
+								{% endif %}
+
+								<div class="form-group">
+									<button type="submit"
+									class="form-control  btn-primary rounded submit px-3" style="font-weight:700; border: 0.5px solid gray">Se connecter</button>
+								</div>
+
+								<div class="form-group d-md-flex">
+									<div class="w-50 text-left">
+										<label class="checkbox-wrap  mb-0" style="color:blue ;">Ne m'oubliez pas
+											<input type="checkbox" >
+												<span class="checkmark"></span>
 										</label>
 									</div>
+
 									<div class="w-50 text-md-right">
-										<a href="{{ path('app_email') }}"  style="color:blue ; hover:underlined ">Mot de passe oublié</a>
+										<a href="{{ path('app_email') }}"  style="color:blue  ">Mot de passe oublié</a>
 									</div>
-		            </div>
-                    <p class="text-center">Vous n'êtes pas un  membre ?   <a data-toggle="tab" href="/sinscrire" style="color:blue;">S'inscrire</a></p>
-		          </form>
-		          
-		        </div>
-		      </div>
+		            			</div>
+
+                    			<p class="text-center">Vous n'êtes pas un  membre ?   <a class="zzz"  href="/sinscrire" style="color:blue;">S'inscrire</a></p>
+		          			</form>
+		        		</div>
+		      		</div>
 				</div>
 			</div>
 		</div>
+
 	</section>
 
 	<script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/mainSignIn.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/mainSignIn.js"></script>
 
+	<script>
+
+		let myForm = document.getElementById('myform');
+		let emailInput = document.getElementById('email');
+		let passwordInput = document.getElementById('password');
+		let emailError = document.getElementById('emailError');
+		let emailErrorRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		let emailRegex = document.getElementById('emailRegex');
+		let passwordError = document.getElementById('passwordError');
+
+		myForm.addEventListener('submit', function(e) {
+			if (emailInput.value.trim() === "") {
+				emailError.style.display = 'block';
+				emailRegex.style.display = 'none';
+				e.preventDefault();
+
+			} else if (!emailErrorRegex.test(emailInput.value)) {
+			emailRegex.style.display = 'block';
+			emailError.style.display = 'none';
+			e.preventDefault();
+
+			} else{
+				emailError.style.display = 'none';
+			}
+
+			if(passwordInput.value.trim() === ""){
+				passwordError.style.display = 'block';
+				e.preventDefault();
+			}else{
+				passwordError.style.display = 'none';
+			}
+		});
+
+	</script>
+
+	<style>
+		.icon-container {
+			margin-right: 5px;
+			width: 20px;
+			height: 20px;
+			background-color: red;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.error-container {
+			display: flex;
+			align-items: center;
+			background-color:#FFDEDE;
+		}
+
+		.error-message {
+			color: red;
+			font-size: 13px;
+			margin-left: 2px;
+		}
+
+		.img {
+			background-size: cover;
+			width: 500px;
+			height: 500px;
+		}
+		a:hover{
+			text-decoration: underline;
+
+		}
+
+	</style>
 	</body>
 </html>
 

@@ -6,9 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Client;
-use App\Form\Client1Type;
-use App\Repository\ClientRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Admin;
+use App\Entity\AbstractUtilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,7 +18,7 @@ class ClientresetpasswordController extends AbstractController
     #[Route('/email', name: 'app_email')]
     public function email(Request $request): Response
     {
-        $errorMessage = $request->query->get('errorMessage', '');
+        $errorMessage = null;
         return $this->render('clientresetpassword/EmailOTP.html.twig', ['errorMessage' => $errorMessage]);
     }
 
@@ -28,15 +27,18 @@ class ClientresetpasswordController extends AbstractController
     {
         $email = $request->request->get('email');
         $entityManager = $doctrine->getManager();
-        $client= $entityManager->getRepository(Client::class)->findOneBy(['email' => $email]);
+        $user= $entityManager->getRepository(AbstractUtilisateur::class)->findOneBy(['email' => $email]);
 
-        if (!$client) {
-            $errorMessage = "L'email saisi n'existe pas.";
-            return $this->redirectToRoute('app_email' , ['errorMessage' => $errorMessage]);
+        if (!$user) {
+            $errorMessage = "L'email entré n’est pas associé à aucun compte.";
+            return $this->render('clientresetpassword/EmailOTP.html.twig' , ['errorMessage' => $errorMessage]);
         }
+
+        $userId = $user->getId();
 
         $OTP=rand(1000, 9999);
         $session->set('OTP', $OTP);
+        $session->set('userId', $userId);
 
         return $this->render('clientresetpassword/OTP.html.twig', [
             'email'=>$email,
@@ -62,16 +64,29 @@ class ClientresetpasswordController extends AbstractController
         $OTPFromSession = $session->get('OTP');
 
         if($userOtp !== $OTPFromSession){
-        return $this -> redirectToRoute('app_email' );
-    }
+            return $this -> redirectToRoute('app_email' );
+        }
 
         return $this->render('clientresetpassword/modifypassword.html.twig' , ['userOtp'=>$userOtp]);
     }
 
-    #[Route('/modificationmotdepasse', name: 'app_modifypassword')]
-    public function modifierMotdepasse(): Response
+    #[Route('/motdepasse', name: 'app_password')]
+    public function Motdepasse(): Response
     {
         return $this->render('clientresetpassword/modifypassword.html.twig');
+    }
+
+    #[Route('/modifiermotdepasse', name: 'app_modifypassword')]
+    public function modifierMotdepasse(Request $request, SessionInterface $session, ManagerRegistry $doctrine): Response
+    {
+        $userId = $session->get('userId');
+        $entityManager = $doctrine->getManager();
+        $user= $entityManager->getRepository(AbstractUtilisateur::class)->find($userId);
+        $password = $request->request->get('password');
+        $user->setMotDePasse($password);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_signin');
     }
 
 

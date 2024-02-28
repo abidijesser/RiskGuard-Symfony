@@ -129,6 +129,8 @@ input{
     display: flex;
     align-items: center;
     background-color:#FFDEDE;
+    padding:10px;
+    margin-top:0px;
 }
 
 .error-message {
