@@ -1,3 +1,59 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+display_home:
+  path: /display_home
+  controller: App\Controller\ReclamationController::index
+
+
+back:
+  path: /back
+  controller: App\Controller\ReclamationController::back
+
+addReclamation:
+  path: /addReclamation
+  controller: App\Controller\ReclamationController::addReclamation
+
+display_reclamation:
+  path: /display_reclamation
+  controller: App\Controller\ReclamationController::afficheReclamation
+
+edit_reclamation:
+  path: /edit_reclamation/{id}
+  controller: App\Controller\ReclamationController::modifReclamation
+
+
+delete_reclamation:
+  path: /deleteReclamation/{id}
+  controller: App\Controller\ReclamationController::suppressionReclamation
+
+repondre_reclamation:
+  path: /repondre_reclamation/{id}
+  controller: App\Controller\ReclamationController::repondreReclamation
+
+
+addReponse:
+  path: /addReponse/{id_reclamation}
+  controller: App\Controller\ReponseController::addReponse
+
+
+display_reponse:
+  path: /display_reponse
+  controller: App\Controller\ReponseController::displayReponse
+
+display_front:
+  path: /display_front
+  controller: App\Controller\ReponseController::display_front
+
+
+editReponse:
+  path: /editReponse/{id}
+  controller: App\Controller\ReponseController::editReponse
+
+deleteReponse:
+  path: /deleteReponse/{id}
+  controller: App\Controller\ReponseController::deleteReponse
+
+
+
+
