@@ -3,6 +3,7 @@
 <head>
     <title>OTP validation</title>
     <link href="{{ asset('assets/css/otp.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 <body class="bg-gray">
 <div class="container">
@@ -12,6 +13,7 @@
         <span class="mainHeading">Code de validation</span>
         <p class="otpSubheading">Entrez le code de vérification que nous avons envoyé à :</p>
         <p class="otpSubheading">{{ email }} : {{ OTP }}</p>
+
         <div class="inputContainer">
             <input required maxlength="1" type="text" class="otp-input" id="otp-input1" name="otp1" />
             <input required maxlength="1" type="text" class="otp-input" id="otp-input2" name="otp2" />
@@ -27,6 +29,10 @@
 
     </form>
 </div>
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 <script>
     let otp1=document.getElementById("otp-input1") ;

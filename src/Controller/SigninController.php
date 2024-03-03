@@ -10,14 +10,16 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Client;
 use App\Entity\Admin;
 use App\Entity\AbstractUtilisateur;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 
 class SigninController extends AbstractController
 {
     #[Route('/signin', name: 'app_signin')]
-    public function index(Request $request): Response
+    public function index(Request $request, SessionInterface $session): Response
     {
+        $session->invalidate();
         $emailError = null;
         $passwordError=null;
         return $this->render('signin/index.html.twig', [

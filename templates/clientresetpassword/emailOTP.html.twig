@@ -5,13 +5,8 @@
 
         <title>Email verification</title>
         <link href="{{ asset('assets/css/emailOTP.css') }}" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
-        <link href=" {{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
     </head>
 
@@ -24,38 +19,30 @@
             <form class="form" id="myform" action="{{ path('app_verifyemail')}}" method="POST">
                 <div class="form-group">
                     <label for="email" >Email</label>
+{#                    {% for message in app.flashes('notice') %}#}
+{#                        <div class="flash-notice">#}
+{#                            {{ message }}#}
+{#                        </div>#}
+{#                    {% endfor %}#}
                     <input type="text" id="email" name="email" placeholder="Votre email" >
 
-                    <div id="emailError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;">
+                    <div id="emailError" style="  border: 1px solid red; border-radius:3px; margin-top:4px; padding-left:4px; padding:0px; display: none;">
                         <div class="error-container">
                             <div class="icon-container">
                                 <i class="fas fa-exclamation fa-xs" style="color: white;"></i>
                             </div>
-                            <div class="error-message">Le champs <b>Email</b> est requis.</div>
+                            <div class="error-message" style="font-size: 15px">Le champs <b>Email</b> est requis.</div>
                         </div>
                     </div>
 
-                    <div id="emailRegex" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;">
+                    <div id="emailRegex" style="border: 1px solid red; border-radius:3px; margin-top:4px; padding-left:4px; padding:0px; display: none;">
                         <div class="error-container">
                             <div class="icon-container">
                                 <i id=" icon"class="fas fa-exclamation fa-xs" style="color: white;"></i>
                             </div>
-                            <div class="error-message">Veuillez saisir une adresse <b>email</b> valide.</div>
+                            <div class="error-message" style="font-size: 15px">Veuillez saisir une <b>adresse email</b> valide.</div>
                         </div>
                     </div>
-
-                    {% if errorMessage %}
-                        <div id="emailExistance" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: block;">
-                            <div class="error-container">
-                                <div class="icon-container">
-                                    <i id=" icon"class="fas fa-exclamation fa-xs" style="color: white;"></i>
-                                </div>
-                                <div class="error-message">
-                                    {{ errorMessage }}
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
 
                 </div>
 
@@ -66,27 +53,30 @@
             </form>
         </div>
 
-        <script>
+        <script src="//code.jquery.com/jquery.js"></script>
+        <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
+        <script>
 
             let myForm = document.getElementById('myform');
             let myRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             let emailInput = document.getElementById('email');
             let emailError = document.getElementById('emailError');
             let emailRegex = document.getElementById('emailRegex');
-            let emailExistance = document.getElementById('emailExistance');
+            // let emailExistance = document.getElementById('emailExistance');
 
             myForm.addEventListener('submit', function(e) {
                 if (emailInput.value.trim() === "") {
                     emailError.style.display = 'block';
                     emailRegex.style.display = 'none';
-                    emailExistance.style.display='none';
+                    // emailExistance.style.display='none';
                     e.preventDefault();
 
                 } else if (!myRegex.test(emailInput.value)) {
                     emailRegex.style.display = 'block';
                     emailError.style.display = 'none';
-                    emailExistance.style.display='none';
+                    // emailExistance.style.display='none';
                     e.preventDefault();
 
                 } else {
