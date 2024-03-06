@@ -72,7 +72,7 @@ class="main-content position-relative border-radius-lg ">
 		<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 			<div class="ms-md-auto pe-md-3 d-flex align-items-center">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Type here...">
+					<input type="text" class="form-control" placeholder="Type here..." id="inputSearch">
 					<span class="input-group-text bg-white">
 						<i class="fas fa-search text-primary" aria-hidden="true"></i>
 					</span>
@@ -120,12 +120,54 @@ class="main-content position-relative border-radius-lg ">
 						{% endblock %}
 					
 						<script>
-							function showClientDetails(clientName, clientId) {
-								alert("Nom du client: " + clientName + ", ID du client: " + clientId);
-								var modalTitle = document.getElementById('modifyTitle');
-								modalTitle.textContent = "Modifier : " + clientName;
-								
+
+							function rechercherAvancee() {
+								var inputSearch = document.getElementById('inputSearch').value.trim().toLowerCase();
+								var table = document.querySelector('.table');
+								var tbody = table.querySelector('tbody');
+								var h3 = document.querySelector('h3');
+								var tri = document.querySelector('#sortForm');
+								var rows = tbody.querySelectorAll('tr');
+								var rowCount = 0;
+
+								rows.forEach(row => {
+									var found = false;
+									row.querySelectorAll('td').forEach(cell => {
+										var text = cell.textContent.trim().toLowerCase();
+										var keywords = inputSearch.split(" ");
+										var keywordFound = keywords.every(keyword => text.includes(keyword));
+										if (keywordFound) {
+											found = true;
+										}
+									});
+									if (found) {
+										row.style.display = '';
+										rowCount++;
+									} else {
+										row.style.display = 'none';
+										h3.style.display = 'none';
+										tri.style.display = 'none';
+									}
+								});
+
+								// Afficher le paragraphe si aucun client n'est trouvé
+								var paragraph = document.getElementById('noResults');
+								var oups = document.getElementById('oups');
+								if (rowCount === 0) {
+									table.style.display = 'none';
+									paragraph.style.display = 'block';
+									oups.style.display = 'block';
+								} else {
+									table.style.display = 'table';
+									h3.style.display = 'block';
+									tri.style.display = 'block';
+									paragraph.style.display = 'none';
+									oups.style.display = 'none';
+								}
 							}
+
+							// Écoute de l'événement d'entrée dans le champ de recherche
+							document.getElementById('inputSearch').addEventListener('input', rechercherAvancee);
 						</script>
 
 						<form id="sortForm">
@@ -173,6 +215,12 @@ class="main-content position-relative border-radius-lg ">
 						}
 					</script>
 
+						<div>
+							<p id="oups" style=" display: none; margin-left: 30%; margin-top: 18%; font-size: 40px" > Oopssss...</p>
+							<p id="noResults"  class="text-primary" style=" display: none; margin-left: 30%; font-size: 25px">Aucun client avec ces informations.</p>
+						</div>
+
+
 						<table class="table table-bordered table-responsive table-hover" style="padding-right:5px; overflow: hidden; padding-right:10px; border-radius:10px; ">
 							<thead>
 								<tr class="bg-primary text-center text-white">
@@ -217,75 +265,6 @@ class="main-content position-relative border-radius-lg ">
 								{% endfor %}
 							</tbody>						
 						</table>
-
-
-						<!-- Button edit -->
-						<!-- Modal pour la modification d'un client -->
-						<form>			
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="modifyTitle">modifier : </h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<div class="row">
-												<div class="col">
-													<input type="text" class="form-control border-primary" placeholder="Nom">
-												</div>
-												<div class="col">
-													<input type="text" class="form-control border-primary" placeholder="Prenom">
-												</div>
-											</div>
-											<div class="row mt-2">
-												<div class="col">
-													<input type="text" class="form-control border-primary" placeholder="Télephone">
-												</div>
-												<div class="col">
-													<input type="text" class="form-control border-primary" placeholder="CIN">
-												</div>
-											</div>
-											<div class="row mt-2">
-												<div class="col">
-													<input type="date" class="form-control border-primary" placeholder="Date de naissance">
-												</div>
-												<div class="col">
-													<input type="text" class="form-control border-primary" placeholder="Adresse domicile">
-												</div>
-											</div>
-										</div>
-
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-											<a id="updateButton" type="button" class="btn btn-primary" >
-												Enregistrer les modification
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-						
-						<!-- Button delete -->
-						<!-- Modal -->
-						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header" style="background-color: #FADBD8 ">
-										<h5 class="modal-title" id="staticBackdropLabel">Suppression</h5>
-										<button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										etes vous sûr de supprimer ...
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-										<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
-									</div>
-								</div>
-							</div>
-						</div>
 						
 					{% endblock %}
 				</div>
