@@ -6,86 +6,47 @@
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
     {% block title %}
-        Ajouter client
-    {% endblock %} 
-    {% block Clients  %}
-        <li class="nav-item">
-			<a class="nav-link active" href=" {{ path('client_allshow') }} " >
-				<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-					<i class="fas fa-user text-primary text-sm opacity-10 mb-2"></i>
-				</div>
-				<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Clients</span>
-			</a>
-		</li>
+        Ajouter Admin
     {% endblock %}
 
     {% block body %}
 
-    
+        <nav aria-label="breadcrumb" >
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('client_allshow') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter un nouveau Admin</li>
+            </ol>
+        </nav>
 
-    <nav aria-label="breadcrumb" >
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('client_allshow') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Ajouter un client</li>
-        </ol>
-    </nav>
+        <div style="padding:3px">
+            <form>
 
-    <div style="padding:3px">
-        <form>
+                <div class="row">
+                    <div class="col">
+                        <label class="label" for="nom"style="font-size: 0.9em; " >Nom <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" placeholder="Le nom du client">
+                    </div>
 
-            <div class="row">
-                <div class="col">
-                    <label class="label" for="nom"style="font-size: 0.9em; " >Nom <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="Le nom du client">
+                    <div class="col">
+                        <label class="label" for="nom"style="font-size: 0.9em; " >Prénom <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" placeholder="Le prénom du client">
+                    </div>
                 </div>
-                <div class="col">
-                    <label class="label" for="nom"style="font-size: 0.9em; " >Prénom <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="Le prénom du client">
+
+                <div class="form-group mt-3">
+                    <label class="label" for="nom"style="font-size: 0.9em; " >Email <span style="color: red;">*</span></label>
+                    <input type="email" class="form-control" id="inputAddress" placeholder="Email du client">
                 </div>
-            </div>
 
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Email <span style="color: red;">*</span></label>
-                <input type="email" class="form-control" id="inputAddress" placeholder="Email du client">
-            </div>
+                <div class="form-group mt-3">
+                    <label class="label" for="nom"style="font-size: 0.9em; " >Télephone <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder=" Le numéro de télephone du client">
+                </div>
 
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Mot de passe <span style="color: red;">*</span></label>
-                <input type="password" class="form-control" id="inputAddress" placeholder="Mot de passe du client">
-            </div>
-
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Confirmer mot de passe <span style="color: red;">*</span></label>
-                <input type="password" class="form-control" id="inputAddress" placeholder="Confirmer le mot de passe du client">
-            </div>
-
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Télephone <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="inputAddress" placeholder=" Le numéro de télephone du client">
-            </div>
-
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >CIN <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Le cin du client">
-            </div>
-
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Adresse domicile <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Adresse domicile du client">
-            </div>
-
-            <div class="form-group mt-3">
-                <label class="label" for="nom"style="font-size: 0.9em; " >Date de naissance <span style="color: red;">*</span></label>
-                <input type="date" class="form-control" id="inputAddress" >
-            </div>
-
-        </form>
-    </div>
+            </form>
+        </div>
             
 
-
-            
-  
     {% endblock %}
 
 {% endblock %}

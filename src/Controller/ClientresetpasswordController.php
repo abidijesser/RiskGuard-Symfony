@@ -106,6 +106,10 @@ class ClientresetpasswordController extends AbstractController
         $entityManager = $doctrine->getManager();
         $user= $entityManager->getRepository(AbstractUtilisateur::class)->find($userId);
         $password = $request->request->get('password');
+        if ($password === null) {
+            $flashy->success('Invalid Mot de passe ', 'http://your-awesome-link.com');
+            return $this->redirectToRoute('app_password');
+        }
         $user->setMotDePasse($password);
         $entityManager->flush();
         $session->invalidate();

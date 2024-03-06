@@ -40,87 +40,24 @@
 			<div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
 				<ul class="navbar-nav">
 
-					{% block Clients  %}
 					<li class="nav-item">
-						<a class="nav-link active" href="./indexback.html">
+						<a class="nav-link active" href=" {{ path('client_allshow') }} " >
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 								<i class="fas fa-user text-primary text-sm opacity-10 mb-2"></i>
 							</div>
 							<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Clients</span>
 						</a>
 					</li>
-					 {% endblock %}
 
 					<li class="nav-item mt-2">
-						<a class="nav-link active" href="{{path('client_add')}}">
+						<a class="nav-link active" href="{{path('adminForm')}}">
 							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 								<i class="fas fa-plus text-primary text-sm opacity-10 mb-2"></i>
 							</div>
-							<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Ajouter un client</span>
+							<span class="nav-link-text ms-1" style="letter-spacing: 0.5px;">Ajouter un admin</span>
 						</a>
 					</li>
 
-					
-					<li class="nav-item">
-						<a class="nav-link" href="./pages/User.html">
-							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								{# <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i> #}
-							</div>
-							<span class="nav-link-text ms-1">  </span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " href="./pages/Employes.html">
-							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								{# <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i> #}
-							</div>
-							<span class="nav-link-text ms-1">  </span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " href="./pages/Reclamations.html">
-							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
-							</div>
-							<span class="nav-link-text ms-1">  </span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " href="./pages/Reponses.html">
-							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
-							</div>
-							<span class="nav-link-text ms-1">  </span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " href="./pages/Marketing.html">
-							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-								{# <i class="ni ni-credit-card text-success text-sm opacity-10"></i> #}
-							</div>
-							<span class="nav-link-text ms-1">  </span>
-						</a>
-					</li>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " href="./pages/Finances.html">
-						<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-							{# <i class="ni ni-app text-info text-sm opacity-10"></i> #}
-						</div>
-						<span class="nav-link-text ms-1">  </span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " href="./pages/Assurances.html">
-						<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-							{# <i class="ni ni-app text-info text-sm opacity-10"></i> #}
-						</div>
-						<span class="nav-link-text ms-1">  </span>
-					</a>
-				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6"></h6>
-				</li>
 			</ul>
 		</div>
 	</aside><main

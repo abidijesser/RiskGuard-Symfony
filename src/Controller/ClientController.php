@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Form\Client1Type;
 use App\Repository\ClientRepository;
+use App\Entity\Admin;
+use App\Form\Admin1Type;
+use App\Repository\AdminRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,28 +28,6 @@ class ClientController extends AbstractController
             'clients' => $clientRepository->findAll(),
         ]);
     }
-
-    #[Route('/new', name: 'app_client_new')]
-    public function new(ManagerRegistry $doctrine, Request $req): Response
-    {
-        $em= $doctrine->getManager();
-        $client = new Client();
-        $form = $this->createForm(Client1Type::class, $client);
-        $form->handleRequest($req);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($client);
-            $em->flush();
-
-            return $this->redirectToRoute('app_signin', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('client/new.html.twig', [
-
-            'form' => $form,
-        ]);
-    }
-
 
     #[Route('/update/{id}', name: 'client_update')]
     public function update(Request $request, ManagerRegistry $doctrine, int $id): Response
@@ -123,7 +104,7 @@ class ClientController extends AbstractController
         return $this->render('admindashboard/dashboardAdmin.html.twig', ['clients' => $clients]);
     }
     
-    #[Route('/ajouterclient', name: 'client_add')]
+    #[Route('/ajouteradmin', name: 'adminForm')]
     public function addClient(ManagerRegistry $doctrine): Response
     {
         return $this->render('admindashboard/ajoutClient.html.twig');
