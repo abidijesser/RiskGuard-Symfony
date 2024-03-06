@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>OTP validation</title>
     <link href="{{ asset('assets/css/otp.css') }}" rel="stylesheet"/>
+
     <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 <body class="bg-gray">
@@ -11,17 +12,16 @@
     <form class="otp-Form" id="otpForm" action="{{ path('app_verifyotp') }}" method="POST">
 
         <span class="mainHeading">Code de validation</span>
-        <p class="otpSubheading">Entrez le code de vérification que nous avons envoyé à :</p>
-        <p class="otpSubheading">{{ email }} : {{ OTP }}</p>
+        <p class="otpSubheading">Entrez le code de vérification que nous avons vous envoyé.</p>
 
         <div class="inputContainer">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input1" name="otp1" />
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input2" name="otp2" />
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input3" name="otp3" />
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input4" name="otp4" />
+            <input  maxlength="1" type="text" class="otp-input" id="otp-input1" name="otp1" autofocus style="background-color: #E8E8E8"/>
+            <input  maxlength="1" type="text" class="otp-input" id="otp-input2" name="otp2" style="background-color: #E8E8E8" />
+            <input  maxlength="1" type="text" class="otp-input" id="otp-input3" name="otp3" style="background-color: #E8E8E8" />
+            <input  maxlength="1" type="text" class="otp-input" id="otp-input4" name="otp4" style="background-color: #E8E8E8" />
         </div>
 
-        <button class="verifyButton" type="submit" onclick="getOTP()"> <span class="ver"> Vérifier</span> </button>
+        <button class="verifyButton" type="submit" > <span class="ver"> Vérifier</span> </button>
 
         <div class="resendContainer">
             <p class="resendNote ">Vous n'avez pas reçu le code? <span class="resendBtn">Renvoyer</span> </p>
@@ -39,14 +39,6 @@
     let otp2=document.getElementById("otp-input2") ;
     let otp3=document.getElementById("otp-input3") ;
     let otp4=document.getElementById("otp-input4") ;
-
-    function getOTP() {
-        console.log(typeof {{ OTP }})
-        console.log(typeof otp1.value);
-        console.log(typeof otp2.value);
-        console.log(typeof otp3.value);
-        console.log(typeof otp4.value);
-    }
 
     document.addEventListener("DOMContentLoaded", function() {
         var otpForm = document.getElementById('otpForm');
@@ -101,6 +93,50 @@
             });
         }
     });
+
+
+
+    document.getElementById('otpForm').addEventListener('submit', function(event) {
+        var inputs = document.getElementsByClassName('otp-input');
+        var isValid = true;
+
+        // Vérifie si tous les champs sont remplis
+        for (var i = 0; i < inputs.length; i++) {
+            if (!inputs[i].value) {
+                isValid = false;
+                inputs[i].classList.add('error');
+                // Effectuer une animation de vibration
+                inputs[i].animate([
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(0px)' }
+                ], {
+                    duration: 500,
+                    iterations: 1
+                });
+            } else {
+                inputs[i].style.borderColor = '';
+            }
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
 </script>
+
+<style>
+    .error {
+        border: 1px solid red !important;
+    }
+
+</style>
 </body>
 </html>

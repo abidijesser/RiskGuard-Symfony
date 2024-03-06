@@ -122,10 +122,6 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/mainSignIn.js"></script>
 
-	<script src="//code.jquery.com/jquery.js"></script>
-	<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
-	{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
-
 	<script>
 
 		let myForm = document.getElementById('myform');
@@ -196,6 +192,10 @@
 		}
 
 	</style>
+
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+	{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 	</body>
 </html>
 

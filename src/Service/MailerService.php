@@ -15,7 +15,7 @@ class MailerService
 
     public function sendEmail(
 
-        $to = 'abidijasser001@gmail.com',
+        $to = 'jasserabidi00@gmail.com',
         $subject='OTP validation',
         $text='Sending emails is fun again!',
         $content = '<p>See Twig integration for better HTML integration!</p> ',

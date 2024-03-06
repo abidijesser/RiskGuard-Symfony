@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Client;
 use App\Entity\Admin;
@@ -24,10 +27,9 @@ class ClientresetpasswordController extends AbstractController
     }
 
     #[Route('/verifieremail', name: 'app_verifyemail')]
-    public function verifyEmail(Request $request, ManagerRegistry $doctrine, SessionInterface $session, FlashyNotifier $flashy): Response
+    public function verifyEmail(Request $request, ManagerRegistry $doctrine, SessionInterface $session, FlashyNotifier $flashy, MailerInterface $mailer): Response
     {
         $email = $request->request->get('email');
-
         $entityManager = $doctrine->getManager();
         $user= $entityManager->getRepository(AbstractUtilisateur::class)->findOneBy(['email' => $email]);
 
@@ -37,15 +39,21 @@ class ClientresetpasswordController extends AbstractController
         }
 
         $userId = $user->getId();
-        $session->set('userId', $userId);
         $OTP=rand(1000, 9999);
+
+        $emailOTP = (new Email())
+            ->from(new Address('riskguard.suuport@gmail.com', 'Riskguard Support'))
+            ->to($email)
+            ->subject('Demande de réinitialisation de mot de passe')
+            ->html('<p>Bonjour,</p><p>Vous avez demandé la réinitialisation de votre mot de passe. 
+            Voici votre code de validation : <strong>' . $OTP . '</strong>.</p><p>Cordialement,<br>Riskguard Support</p>');
+        $mailer->send($emailOTP);
+
+        $session->set('userId', $userId);
         $session->set('OTP', $OTP);
         $session->set('email',$email);
 
-        return $this->render('clientresetpassword/OTP.html.twig', [
-            'email'=>$email,
-            'OTP' => $OTP
-        ]);
+        return $this->render('clientresetpassword/OTP.html.twig');
     }
 
     #[Route('/otp', name: 'app_otp')]
@@ -101,8 +109,8 @@ class ClientresetpasswordController extends AbstractController
         $user->setMotDePasse($password);
         $entityManager->flush();
         $session->invalidate();
-        $flashy->success('Votre mot de passe a été changé avec succès.', 'http://your-awesome-link.com');
-
+        
+        $flashy->success('Votre mot de passe a été changé avec succés.', 'http://your-awesome-link.com');
         return $this->redirectToRoute('app_signin');
     }
 
