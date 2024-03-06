@@ -109,7 +109,7 @@ class ClientresetpasswordController extends AbstractController
         $user->setMotDePasse($password);
         $entityManager->flush();
         $session->invalidate();
-        
+
         $flashy->success('Votre mot de passe a été changé avec succés.', 'http://your-awesome-link.com');
         return $this->redirectToRoute('app_signin');
     }
