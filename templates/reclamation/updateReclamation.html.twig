@@ -61,6 +61,10 @@
                         {{ form_widget(f.email_client, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="mb-3">
+                        {{ form_label(f.num_tel, 'Numero_tel du Client', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(f.num_tel, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
                         {{ form_label(f.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(f.description, {'attr': {'class': 'form-control'}}) }}
                     </div>

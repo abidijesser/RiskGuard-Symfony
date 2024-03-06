@@ -18,6 +18,7 @@ class ReclamationType extends AbstractType
             ->add('id_reclamation', HiddenType::class) // Add this line to include the id field
             ->add('nom_client', TextType::class)
             ->add('email_client', TextType::class)
+            ->add('num_tel', TextType::class)
             ->add('description', TextareaType::class);
         // Ne pas ajouter le champ 'etat' ici
     }

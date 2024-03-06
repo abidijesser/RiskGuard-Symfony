@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Service\SmsGenerator;
 use App\Entity\Reclamation;
 use App\Entity\Reponse;
 use App\Form\ReponseType;
@@ -8,14 +9,26 @@ use App\Repository\ReponseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class ReponseController extends AbstractController
 {
+    // Injecter le service SmsGenerator dans le contrôleur
+    //private $smsGenerator;
+
+    public function __construct(SmsGenerator $smsGenerator)
+    {
+        $this->smsGenerator = $smsGenerator;
+    }
 
     #[Route('/addReponse/{id_reclamation}', name: 'addReponse')]
-    public function addReponse(Request $request, $id_reclamation): Response
+    public function addReponse(Request $request, $id_reclamation, MailerInterface $mailer): Response
     {
         $reponse = new Reponse();
 
@@ -40,6 +53,28 @@ class ReponseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reponse);
             $entityManager->flush();
+            // Envoi du SMS au client
+            $clientNumber = $reponse->getNumTel();
+            //$clientName = $reponse->getNomClient();
+            //$message = 'Votre réclamation a été répondue. Consultez la réponse sur notre plateforme.';
+            //$this->smsGenerator->sendSms($clientNumber, $clientName, $message);
+            // Envoi d'un email au client pour lui indiquer qu'une réponse a été ajoutée à sa réclamation
+            $clientName = $reponse->getNomClient();
+            $clientEmail = $reponse->getEmailClient();
+            $reclamationContent = $reponse->getDescription();
+            $reponseContent = $reponse->getContenu();
+
+            $email = (new Email())
+                ->from('ghassen21092002@gmail.com')
+                ->to($clientEmail)
+                ->subject('Réponse à votre réclamation')
+                ->html('Bonjour ' . $clientName . ',<br>Une réponse a été ajoutée à votre réclamation:' . $reclamationContent . ' <br><br> la réponse:' . $reponseContent . '<br><br>Vous pouvez la consultez sur notre plateforme.');
+
+            try {
+                $mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+                // Gérer les erreurs liées à l'envoi de l'email
+            }
 
             // Rediriger vers une autre page après l'ajout de la réponse
             return $this->redirectToRoute('display_reponse');
@@ -91,10 +126,17 @@ class ReponseController extends AbstractController
 
 
     #[Route('/display_reponse', name:'display_reponse')]
-    public function displayReponse(): Response
+    public function displayReponse(Request $request, PaginatorInterface $paginator): Response
     {
-        // Récupérer toutes les réponses
-        $reponses = $this->getDoctrine()->getManager()->getRepository(Reponse::class)->findAll();
+        // Récupérer toutes les réponses avec le repository
+        $reponsesQuery = $this->getDoctrine()->getRepository(Reponse::class)->findAll();
+
+        // Paginer les réponses
+        $reponses = $paginator->paginate(
+            $reponsesQuery, // Requête pour récupérer les données
+            $request->query->getInt('page', 1), // Numéro de page par défaut
+            4 // Nombre d'éléments par page
+        );
 
         // Créer un tableau pour stocker les réclamations associées à chaque réponse
         $reclamations = [];
@@ -111,10 +153,17 @@ class ReponseController extends AbstractController
     }
 
     #[Route('/display_front', name:'display_front')]
-    public function display_front(): Response
+    public function display_front(Request $request, PaginatorInterface $paginator): Response
     {
-        // Récupérer toutes les réponses
-        $reponses = $this->getDoctrine()->getManager()->getRepository(Reponse::class)->findAll();
+        // Récupérer toutes les réponses avec le repository
+        $reponsesQuery = $this->getDoctrine()->getRepository(Reponse::class)->findAll();
+
+        // Paginer les réponses
+        $reponses = $paginator->paginate(
+            $reponsesQuery, // Requête pour récupérer les données
+            $request->query->getInt('page', 1), // Numéro de page par défaut
+            4 // Nombre d'éléments par page
+        );
 
         // Créer un tableau pour stocker les réclamations associées à chaque réponse
         $reclamations = [];

@@ -5,7 +5,7 @@
 
 {% block asidee %}
 
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-5 fixed-start ms-2 " id="sidenav-main">
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-5 fixed-start ms-0 " id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="{{ path('back') }}">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <div class="table-responsive p-0" style="max-height: 600px; overflow-y: auto;">
                         <table class="table align-items-center justify-content-center mb-0">
                             <thead>
                             <tr>
@@ -83,6 +83,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Réclamation</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Réclamation</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom du client</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Num du client</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date du réponse</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Réponse</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
@@ -108,6 +109,9 @@
                                         <p class="text-sm font-weight-bold mb-0">{{ reponse.getNomClient() }}</p>
                                     </td>
                                     <td>
+                                        <p class="text-sm font-weight-bold mb-0">{{ reponse.getNumTel() }}</p>
+                                    </td>
+                                    <td>
                                         <p class="text-sm font-weight-bold mb-0">{{ reponse.getDate()|date('Y-m-d H:i:s') }}</p>
                                     </td>
                                     <td>
@@ -125,6 +129,34 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                        <!-- Ajout de la pagination -->
+                        <div class="d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if reponses.currentPageNumber != 1 %}
+                                        <li class="page-item"><a class="page-link" href="{{ path('display_reponse', {'page': reponses.currentPageNumber - 1}) }}">Précédent</a></li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+                                    {% endif %}
+
+                                    {% for page in 1..reponses.pageCount %}
+                                        {% if page != reponses.currentPageNumber %}
+                                            <li class="page-item"><a class="page-link" href="{{ path('display_reponse', {'page': page}) }}">{{ page }}</a></li>
+                                        {% else %}
+                                            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if reponses.currentPageNumber != reponses.pageCount %}
+                                        <li class="page-item"><a class="page-link" href="{{ path('display_reponse', {'page': reponses.currentPageNumber + 1}) }}">Suivant</a></li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

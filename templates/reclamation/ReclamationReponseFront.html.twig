@@ -22,6 +22,7 @@
 
     <br><br><br><br><br><br>
     <!-- ======= Main Content ======= -->
+    <!-- ======= Main Content ======= -->
     <main class="main-content position-relative border-radius-lg ">
         <br>
         <div class="row">
@@ -51,7 +52,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center justify-content-center mb-0">
+                            <table id="reclamation-reponse-table" class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Réclamation</th>
@@ -65,55 +66,48 @@
                                     <tr>
                                         <td class="bg-primary text-white">{{ reponse.getDescription() }}</td>
                                         <td class="bg-primary text-white">{{ reponse.getNomClient() }}</td>
-                                        <td class="bg-primary text-white"><textarea class="form-control bg-white text-black border-0" rows="4" readonly>{{ reponse.getContenu() }}</textarea></td> {# Couleur de fond gris clair pour la réponse #}
+                                        <td class="bg-primary text-white"><textarea class="form-control bg-white text-black border-0" rows="4" readonly>{{ reponse.getContenu() }}</textarea></td>
+                                        {# Couleur de fond gris clair pour la réponse #}
                                         <td class="bg-primary text-white">{{ reponse.getDate()|date('Y-m-d H:i:s') }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            <!-- Ajout de la pagination -->
+                            <div class="d-flex justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        {% if reponses.currentPageNumber != 1 %}
+                                            <li class="page-item"><a class="page-link" href="{{ path('display_front', {'page': reponses.currentPageNumber - 1}) }}">Précédent</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+                                        {% endif %}
+
+                                        {% for page in 1..reponses.pageCount %}
+                                            {% if page != reponses.currentPageNumber %}
+                                                <li class="page-item"><a class="page-link" href="{{ path('display_front', {'page': page}) }}">{{ page }}</a></li>
+                                            {% else %}
+                                                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if reponses.currentPageNumber != reponses.pageCount %}
+                                            <li class="page-item"><a class="page-link" href="{{ path('display_front', {'page': reponses.currentPageNumber + 1}) }}">Suivant</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <style>
-        /* Ajout de styles personnalisés pour la table */
-        .special-table {
-            border-collapse: collapse;
-            width: 100%;
-            border-radius: 50px; /* Bordure arrondie */
-        }
-
-        .special-table th,
-        .special-table td {
-            padding: 40px;
-            text-align: left;
-            border-bottom: 1px solid black; /* Bordure inférieure pour chaque ligne */
-        }
-
-        .special-table th {
-            background-color: #007bff; /* Couleur de fond bleue pour l'en-tête */
-            color: white; /* Couleur du texte pour l'en-tête */
-        }
-
-        .special-table tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Couleur de fond pour les lignes impaires */
-        }
-
-        .special-table tbody tr:hover {
-            background-color: #ddd; /* Couleur de fond au survol */
-        }
-
-        .special-table textarea {
-            width: 100%;
-            border: none;
-            background-color: transparent;
-            resize: none;
-        }
-    </style>
-
     <!-- End Main Content -->
+
 
 
     <!-- ======= Contact Section ======= -->
@@ -272,7 +266,6 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-
-
+    
     </body>
 {% endblock %}

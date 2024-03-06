@@ -113,4 +113,12 @@ class Reponse
         }
         return null;
     }
+
+    public function getNumTel(): ?string
+    {
+        if ($this->reclamation) {
+            return $this->reclamation->getNumTel();
+        }
+        return null;
+    }
 }

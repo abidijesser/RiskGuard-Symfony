@@ -26,7 +26,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-6">
                 <h1 class="text-center mb-4" style="color: blue; border: 6px double black; border-radius: 10px; padding: 10px;">Réclamer !</h1>
-                {{ form_start(f) }}
+                {{ form_start(f, {'attr': {'novalidate': 'novalidate'}}) }}
                 <div class="mb-3">
                     <label for="nom_client" class="form-label">Votre nom :</label>
                     {{ form_widget(f.nom_client, {'attr': {'class': 'form-control'}, 'id': 'nom_client'}) }}
@@ -40,20 +40,33 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="num_tel" class="form-label">Votre num_tel :</label>
+                    {{ form_widget(f.num_tel, {'attr': {'class': 'form-control'}, 'id': 'num_tel'}) }}
+                    <small style="color: red;">{{ form_errors(f.num_tel) }}</small>
+                </div>
+
+                <div class="mb-3">
                     <label for="description" class="form-label">Description :</label>
                     {{ form_widget(f.description, {'attr': {'class': 'form-control', 'rows': '5'}, 'id': 'description'}) }}
                     <small style="color: red;">{{ form_errors(f.description) }}</small>
                 </div>
-
+                <!-- Ajoutez le bloc pour afficher les messages flash -->
+                <div class="container">
+                    {% for type, messages in app.flashes() %}
+                        {% for message in messages %}
+                            <div class="alert{% if type == 'error' %} alert-danger{% endif %}">{{ message }}</div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
                 {{ form_end(f) }}
             </div>
-
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="img-fluid logo">
             </div>
         </div>
     </div><!-- End Main Content -->
+
 
 
     <!-- ======= Contact Section ======= -->
