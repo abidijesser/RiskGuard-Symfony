@@ -19,11 +19,7 @@
             <form class="form" id="myform" action="{{ path('app_verifyemail')}}" method="POST">
                 <div class="form-group">
                     <label for="email" >Email</label>
-{#                    {% for message in app.flashes('notice') %}#}
-{#                        <div class="flash-notice">#}
-{#                            {{ message }}#}
-{#                        </div>#}
-{#                    {% endfor %}#}
+
                     <input type="text" id="email" name="email" placeholder="Votre email" >
 
                     <div id="emailError" style="  border: 1px solid red; border-radius:3px; margin-top:4px; padding-left:4px; padding:0px; display: none;">

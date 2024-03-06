@@ -21,7 +21,6 @@ class SinscrireController extends AbstractController
         $em= $doctrine->getManager();
         $client = new Client();
 
-        // Récupérer les données du formulaire à partir de la requête
         $nom = $request->request->get('nom');
         $prenom = $request->request->get('prenom');
         $cin = $request->request->get('cin');        
@@ -30,14 +29,12 @@ class SinscrireController extends AbstractController
         $date_de_naissance = $request->request->get('date_de_naissance');
         $mot_de_passe = $request->request->get('password');       
         $adresse_domicile = $request->request->get('adresse_domicile');
-        
-        // Définir les valeurs récupérées sur l'objet Client
+
         $client->setNom($nom);
         $client->setPrenom($prenom);
         $client->setCin($cin);
         $client->setEmail($email);
         $client->setTelephone($telephone);
-        // Convertir la date de naissance en objet DateTime si nécessaire
         $client->setDateDeNaissance(new \DateTime($date_de_naissance));
         $client->setMotDePasse($mot_de_passe);
         $client->setAdresseDomicile($adresse_domicile);
@@ -47,7 +44,7 @@ class SinscrireController extends AbstractController
         $em->flush();
 
         // Rediriger vers une autre page après l'inscription
-        return $this->redirectToRoute('client_allshow');
+        return $this->redirectToRoute('riskguard_app');
     }
 
     #[Route('/sinscrire', name: 'app_sinscrire')]
