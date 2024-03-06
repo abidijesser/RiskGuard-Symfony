@@ -15,6 +15,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Dompdf\Dompdf;
+
 
 
 class ReponseController extends AbstractController
@@ -203,6 +205,42 @@ class ReponseController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('display_reponse');
+    }
+
+    #[Route('/generatePdf', name: 'generatePdf')]
+    public function generatePdf(): Response
+    {
+        // Récupérer toutes les réponses avec le repository
+        $reponses = $this->getDoctrine()->getRepository(Reponse::class)->findAll();
+
+        // Créez une instance de Dompdf
+        $dompdf = new Dompdf();
+
+        // Récupérez le contenu HTML que vous souhaitez inclure dans le PDF
+        $html = $this->renderView('reponse/pdf_template.html.twig', [
+            // Envoyez des données à votre template si nécessaire
+            'reponses' => $reponses, // Transmettez les données des réponses au modèle Twig
+
+        ]);
+
+        // Chargez le contenu HTML dans Dompdf
+        $dompdf->loadHtml($html);
+
+        // Réglez la taille et l'orientation du papier du PDF
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Effectuez le rendu du PDF
+        $dompdf->render();
+
+        // Générez le contenu du PDF
+        $pdfContent = $dompdf->output();
+
+        // Créez une réponse PDF avec le contenu généré
+        $response = new Response($pdfContent);
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->headers->set('Content-Disposition', 'attachment; filename="reponses.pdf"');
+
+        return $response;
     }
 }
 

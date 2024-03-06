@@ -121,6 +121,18 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            <!-- Ajout des statistiques -->
+                            <!-- Bouton pour afficher les statistiques -->
+                            <div class="d-flex justify-content-center mb-3">
+                                <button id="btnStatistiques" class="btn btn-primary">Afficher les statistiques</button>
+                            </div>
+                            <!-- Section des statistiques (initialement cachée) -->
+                            <div id="statsSection" style="display: none; height: 100vh; display: flex; justify-content: center; align-items: center;">
+                                <canvas id="reclamationChart" style="max-width: 1400px; max-height: 300px;"></canvas>
+                            </div>
+
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <!-- Fin des statistiques -->
                             <!-- Ajout de la pagination avec personnalisation des couleurs -->
                             <div class="d-flex justify-content-center mt-3">
                                 <nav aria-label="Page navigation">
@@ -151,13 +163,65 @@
                                     </ul>
                                 </nav>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        document.getElementById('btnStatistiques').addEventListener('click', function() {
+            var stats = {{ stats|json_encode|raw }};
+
+            var ctx = document.getElementById('reclamationChart').getContext('2d');
+            ctx.fillRect(50, 50, 100, 100);
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total', 'Répondues', 'Non Répondues'],
+                    datasets: [{
+                        label: 'Statistiques des réclamations',
+                        data: [stats.totalReclamations, stats.reclamationsRepondues, stats.reclamationsNonRepondues],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 10 // Taille de la police de la légende
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Afficher la section des statistiques une fois qu'elles sont générées
+            document.getElementById('statsSection').style.display = 'block';
+        });
+    </script>
+
     <div class="footer-area-bottom">
         <div class="container">
             <div class="row">

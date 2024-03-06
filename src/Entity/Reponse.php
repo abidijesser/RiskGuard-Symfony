@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 
+
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
 class Reponse
 {
@@ -29,6 +30,7 @@ class Reponse
     #[ORM\Column(type: "datetime")]
     #[Assert\NotBlank(message:"La date ne doit pas être vide.")]
     #[Assert\Type("\DateTimeInterface")]
+    #[Assert\GreaterThanOrEqual("today", message: "La date doit être égale ou supérieure à la date actuelle.")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 800)]

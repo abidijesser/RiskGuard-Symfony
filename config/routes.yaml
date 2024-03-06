@@ -54,6 +54,13 @@ deleteReponse:
   path: /deleteReponse/{id}
   controller: App\Controller\ReponseController::deleteReponse
 
+generatePdf:
+  path: /generatePdf
+  controller: App\Controller\ReponseController::generatePdf
+
+
+
+
 
 
 

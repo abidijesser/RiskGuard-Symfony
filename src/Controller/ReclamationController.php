@@ -62,23 +62,51 @@ class ReclamationController extends AbstractController
 
 
     #[Route('/display_reclamation', name: 'display_reclamation')]
-    public function afficheReclamation(ReponseRepository $reponseRepository, PaginatorInterface $paginator, Request $request): Response
-    {
-        // Récupérer toutes les réclamations
-        $reclamationsQuery = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->createQueryBuilder('r')
-            ->getQuery();
+    public function afficheReclamation(
+        ReponseRepository $reponseRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        // Récupérer toutes les réclamations sans pagination
+        $allReclamations = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
 
         // Paginer les réclamations
         $reclamations = $paginator->paginate(
-            $reclamationsQuery,
+            $allReclamations,
             $request->query->getInt('page', 1), // Récupérer le numéro de page depuis la requête
             4 // Nombre d'éléments par page
         );
 
+        // Calculer les statistiques des réclamations
+        $stats = $this->calculateReclamationStats($allReclamations, $reponseRepository);
+
         return $this->render('reclamation/afficheReclamations.html.twig', [
             'r' => $reclamations,
-            'reponseRepository' => $reponseRepository
+            'reponseRepository' => $reponseRepository,
+            'stats' => $stats
         ]);
+    }
+
+    private function calculateReclamationStats(array $reclamations, ReponseRepository $reponseRepository): array
+    {
+        $totalReclamations = count($reclamations);
+        $reclamationsRepondues = 0;
+        $reclamationsNonRepondues = 0;
+
+        foreach ($reclamations as $reclamation) {
+            $reponses = $reponseRepository->findReponsesForReclamation($reclamation);
+            if (!empty($reponses)) {
+                $reclamationsRepondues++;
+            } else {
+                $reclamationsNonRepondues++;
+            }
+        }
+
+        return [
+            'totalReclamations' => $totalReclamations,
+            'reclamationsRepondues' => $reclamationsRepondues,
+            'reclamationsNonRepondues' => $reclamationsNonRepondues
+        ];
     }
 
     #[Route('/deleteReclamation/{id}', name: 'delete_reclamation')]
