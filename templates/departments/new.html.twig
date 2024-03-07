@@ -1,0 +1,11 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}New Departments{% endblock %}
+
+{% block employe %}
+    <h1>Create new Departments</h1>
+
+    {{ include('departments/_form.html.twig') }}
+
+    <a href="{{ path('app_departments_index') }}">back to list</a>
+{% endblock %}

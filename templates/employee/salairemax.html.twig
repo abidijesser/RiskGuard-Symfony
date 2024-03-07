@@ -1,0 +1,35 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Employee {% endblock %}
+
+{% block employe %}
+    <h1>L'Employe qui a le Salaire maximum est :</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ employee.nom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+                <th>Salaire</th>
+                <td>{{ employee.Salaire }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_index') }}">back to list</a>
+
+    
+
+    
+{% endblock %}

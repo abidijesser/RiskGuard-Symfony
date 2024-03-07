@@ -1,0 +1,69 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Employee index{% endblock %}
+
+{% block employe %}
+    <h1>Employee index</h1>
+
+    <!-- Add the input field for search above the table -->
+    <div class="input-group mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search employees...">
+    </div>
+
+    <table class="table" id="employeeTable">
+        <thead>
+            <tr>
+                <th style="color: black;">Id</th>
+                <th style="color: black;">Nom</th>
+                <th style="color: black;">Email</th>
+                <th style="color: black;">Salaire</th>
+                <th style="color: black;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.nom }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.Salaire }}</td>
+                    <td>
+                        <a href="{{ path('app_employee_show', {'id': employee.id}) }}">Show</a>
+                        <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">Edit</a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_new') }}">Create new</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{{ path('employee_max_salary') }}"><strong>Afficher l'employe qui a le salaire maximum</strong> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <a href="{{ path('app_departments_index') }}" class="departments-link"><strong>Aller à la page des départements</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ path('app_employee_listem') }}">Imprimer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+    <!-- JavaScript for search functionality -->
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var query = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#employeeTable tbody tr');
+            rows.forEach(function(row) {
+                var name = row.querySelector('td:nth-child(2)'); // Assuming the employee name is in the second column
+                if (name) {
+                    var textValue = name.textContent || name.innerText;
+                    if (textValue.toLowerCase().indexOf(query) > -1) {
+                        row.style.display = ''; // Show the row if the search query matches
+                    } else {
+                        row.style.display = 'none'; // Hide the row if the search query doesn't match
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
