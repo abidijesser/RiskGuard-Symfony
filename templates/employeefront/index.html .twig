@@ -1,0 +1,39 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Departments index{% endblock %}
+
+{% block employe %}
+    <h1>Departments index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Local</th>
+                <th>Chef_dep</th>
+                <th>Code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for department in departments %}
+            <tr>
+                <td>{{ department.id }}</td>
+                <td>{{ department.local }}</td>
+                <td>{{ department.chefDep }}</td>
+                <td>{{ department.code }}</td>
+                <td>
+                    <a href="{{ path('app_departments_show', {'id': department.id}) }}">show</a>
+                    <a href="{{ path('app_departments_edit', {'id': department.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_departments_new') }}">Create new</a>
+{% endblock %}

@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "controllers": {
         "@symfony/ux-turbo": {
             "turbo-core": {
@@ -12,8 +11,5 @@
             }
         }
     },
-=======
-    "controllers": [],
->>>>>>> gestionAssurances
     "entrypoints": []
 }

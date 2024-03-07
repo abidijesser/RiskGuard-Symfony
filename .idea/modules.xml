@@ -4,6 +4,7 @@
     <modules>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/RiskGuard.iml" filepath="$PROJECT_DIR$/.idea/RiskGuard.iml" />
 =======
       <module fileurl="file://$PROJECT_DIR$/.idea/RISKG.iml" filepath="$PROJECT_DIR$/.idea/RISKG.iml" />
@@ -11,6 +12,9 @@
 =======
       <module fileurl="file://$PROJECT_DIR$/.idea/project3eme.iml" filepath="$PROJECT_DIR$/.idea/project3eme.iml" />
 >>>>>>> gestionAssurances
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProjetPi.iml" filepath="$PROJECT_DIR$/.idea/ProjetPi.iml" />
+>>>>>>> lastala
     </modules>
   </component>
 </project>
