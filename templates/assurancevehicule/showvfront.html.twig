@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assurancevehicule{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Assurancevehicule</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+
+                    <tr>
+                        <th scope="row">Marque</th>
+                        <td>{{ assurancevehicule.marque }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Modele</th>
+                        <td>{{ assurancevehicule.modele }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Matricule</th>
+                        <td>{{ assurancevehicule.matricule }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Datedebut</th>
+                        <td>{{ assurancevehicule.datedebut ? assurancevehicule.datedebut|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Periodedevalidation</th>
+                        <td>{{ assurancevehicule.periodedevalidation }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Image</th>
+                        <td>
+                            {% if assurancevehicule.image %}
+                                <img src="{{ asset('uploads/images/' ~ assurancevehicule.image) }}" alt="Assurance Image" class="img-fluid">
+                            {% else %}
+                                No image available
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_assurancevehicule_indexfront') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ path('app_assurancevehicule_edit', {'id': assurancevehicule.id}) }}" class="btn btn-primary">Edit</a>
+        </div>
+
+        {{ include('assurancevehicule/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

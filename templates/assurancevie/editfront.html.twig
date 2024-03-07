@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Assurancevie{% endblock %}
+
+{% block body %}
+    <h1>Edit Assurancevie</h1>
+
+    {{ include('assurancevie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_assurancevie_indexfront') }}">back to list</a>
+
+    {{ include('assurancevie/_delete_form.html.twig') }}
+{% endblock %}

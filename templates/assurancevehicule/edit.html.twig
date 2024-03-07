@@ -1,0 +1,13 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Assurancevehicule{% endblock %}
+
+{% block back %}
+    <h1>Edit Assurancevehicule</h1>
+
+    {{ include('assurancevehicule/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_assurancevehicule_index') }}">back to list</a>
+
+    {{ include('assurancevehicule/_delete_form.html.twig') }}
+{% endblock %}

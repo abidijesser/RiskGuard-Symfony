@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Assurancevie{% endblock %}
+
+{% block body %}
+    <h1>Create new Assurancevie</h1>
+
+    {{ include('assurancevie/_form.html.twig') }}
+
+    <a href="{{ path('app_assurancevie_indexfront') }}">back to list</a>
+{% endblock %}

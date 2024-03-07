@@ -1,0 +1,72 @@
+{# app/templates/assurancevehicule_form.html.twig #}
+
+{{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
+    {{ form_errors(form) }}
+<div class="col-md-6">
+    {{ form_label(form.marque, 'Marque', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.marque, {'attr': {'class': 'form-control' ~ (form_errors(form.marque)|length ? ' is-invalid' : ''), 'id': 'validationCustomMarque'}}) }}
+    {% if form_errors(form.marque)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.marque) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.modele, 'Modèle', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.modele, {'attr': {'class': 'form-control' ~ (form_errors(form.modele)|length ? ' is-invalid' : ''), 'id': 'validationCustomModele'}}) }}
+    {% if form_errors(form.modele)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.modele) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.matricule, 'Matricule', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.matricule, {'attr': {'class': 'form-control' ~ (form_errors(form.matricule)|length ? ' is-invalid' : ''), 'id': 'validationCustomMatricule'}}) }}
+    {% if form_errors(form.matricule)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.matricule) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.datedebut, 'Date début', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.datedebut, {'attr': {'class': 'form-control' ~ (form_errors(form.datedebut)|length ? ' is-invalid' : ''), 'id': 'validationCustomDateDebut'}}) }}
+    {% if form_errors(form.datedebut)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.datedebut) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.periodedevalidation, 'Période de validation', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.periodedevalidation, {'attr': {'class': 'form-control' ~ (form_errors(form.periodedevalidation)|length ? ' is-invalid' : ''), 'id': 'validationCustomPeriodeDeValidation'}}) }}
+    {% if form_errors(form.periodedevalidation)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.periodedevalidation) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+    {% if form.vars.value.image is not empty %}
+        <div>
+            <label>{{ 'Current Image:' }}</label>
+            <img src="{{ asset('/public/uploads/images/' ~ form.vars.value.image) }}" alt="Current Image">
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.assurance, 'Assurance', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.assurance, {'attr': {'class': 'form-control' ~ (form_errors(form.assurance)|length ? ' is-invalid' : ''), 'id': 'validationCustomAssurance'}}) }}
+    {% if form_errors(form.assurance)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.assurance) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-12">
+    <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}
