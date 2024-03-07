@@ -20,6 +20,19 @@ class ConstatvieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Constatvie::class);
     }
+    /**
+     * Find all Constatvie entities sorted by DateDeDeces.
+     *
+     * @return Constatvie[] Returns an array of Constatvie objects
+     */
+        public function findAllSortedByDateDeDeces(): array
+        {
+            return $this->createQueryBuilder('c')
+                ->orderBy('c.DateDeDeces', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+
 
 //    /**
 //     * @return Constatvie[] Returns an array of Constatvie objects

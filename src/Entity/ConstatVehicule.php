@@ -31,6 +31,7 @@ class ConstatVehicule extends Sinistre
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+   
   
 
     public function getTypeVehicule(): ?string
@@ -101,6 +102,18 @@ class ConstatVehicule extends Sinistre
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

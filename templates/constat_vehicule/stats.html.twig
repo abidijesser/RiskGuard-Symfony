@@ -1,0 +1,32 @@
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Statistiques par type de véhicule</h1>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-x6rlWc1E5Fy/iGgi5CTI7Ua3ViKjbsQb+yNycPcSy3e0MS+coCJ8+ndtC1hf6rV4" crossorigin="anonymous">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Récupérer les données du contrôleur
+        const chartData = {{ chartOptions|json_encode|raw }};
+
+        // Créer un nouveau graphique
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: chartData.type,
+            data: chartData.data
+        });
+    </script>
+{% endblock %}

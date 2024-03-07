@@ -35,6 +35,7 @@ class ConstatVehiculeType extends AbstractType
                 'required' => true,
                 'attr' => ['accept' => 'image/*']
             ])
+
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre',
                 'attr' => ['class' => 'btn btn-primary']

@@ -20,7 +20,33 @@ class ConstatVehiculeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ConstatVehicule::class);
     }
+    /**
+     * Search for ConstatVehicule entities by TypeVehicule or marque depending on the input.
+     *
+     * @param string|null $searchTerm
+     * @return ConstatVehicule[] Returns an array of ConstatVehicule objects
+     */
+    public function searchByTypeOrMarque(?string $searchTerm): array
+    {
+        if ($searchTerm === null) {
+            return $this->findAll();
+        }
 
+        return $this->createQueryBuilder('cv')
+            ->andWhere('cv.TypeVehicule LIKE :searchTerm OR cv.marque LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getStatsByTypeVehicule(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.TypeVehicule, COUNT(c.id) as total')
+            ->groupBy('c.TypeVehicule')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return ConstatVehicule[] Returns an array of ConstatVehicule objects
 //     */
