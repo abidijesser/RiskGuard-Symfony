@@ -121,18 +121,6 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            <!-- Ajout des statistiques -->
-                            <!-- Bouton pour afficher les statistiques -->
-                            <div class="d-flex justify-content-center mb-3">
-                                <button id="btnStatistiques" class="btn btn-primary">Afficher les statistiques</button>
-                            </div>
-                            <!-- Section des statistiques (initialement cachée) -->
-                            <div id="statsSection" style="display: none; height: 100vh; display: flex; justify-content: center; align-items: center;">
-                                <canvas id="reclamationChart" style="max-width: 1400px; max-height: 300px;"></canvas>
-                            </div>
-
-                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                            <!-- Fin des statistiques -->
                             <!-- Ajout de la pagination avec personnalisation des couleurs -->
                             <div class="d-flex justify-content-center mt-3">
                                 <nav aria-label="Page navigation">
@@ -163,6 +151,18 @@
                                     </ul>
                                 </nav>
                             </div>
+                            <!-- Ajout des statistiques -->
+                            <!-- Bouton pour afficher les statistiques -->
+                            <div class="d-flex justify-content-center mb-3">
+                                <button id="btnStatistiques" class="btn btn-primary">Afficher les statistiques</button>
+                            </div>
+                            <!-- Section des statistiques (initialement cachée) -->
+                            <div id="statsSection" style="display: none; height: 100vh; display: flex; justify-content: center; align-items: center;">
+                                <canvas id="reclamationChart" style="max-width: 1400px; max-height: 300px;"></canvas>
+                            </div>
+
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <!-- Fin des statistiques -->
                         </div>
                     </div>
                 </div>

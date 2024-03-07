@@ -3,10 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/RiskGuard.iml" filepath="$PROJECT_DIR$/.idea/RiskGuard.iml" />
 =======
       <module fileurl="file://$PROJECT_DIR$/.idea/RISKG.iml" filepath="$PROJECT_DIR$/.idea/RISKG.iml" />
 >>>>>>> gestionReclamation
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/project3eme.iml" filepath="$PROJECT_DIR$/.idea/project3eme.iml" />
+>>>>>>> gestionAssurances
     </modules>
   </component>
 </project>

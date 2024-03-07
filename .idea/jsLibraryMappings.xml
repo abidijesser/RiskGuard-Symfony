@@ -2,9 +2,13 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <file url="PROJECT" libraries="{jquery}" />
 =======
     <file url="PROJECT" libraries="{chart.js}" />
 >>>>>>> gestionReclamation
+=======
+    <file url="PROJECT" libraries="{42d5adcbca, buttons}" />
+>>>>>>> gestionAssurances
   </component>
 </project>

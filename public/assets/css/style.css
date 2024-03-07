@@ -1,4 +1,8 @@
+<<<<<<< HEAD
   /**
+=======
+/**
+>>>>>>> gestionAssurances
 * Template Name: eBusiness
 * Updated: Jan 29 2024 with Bootstrap v5.3.2
 * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
@@ -14,6 +18,7 @@ body {
   height: 100%;
 }
 
+<<<<<<< HEAD
 /* CSS pour le bouton personnalisé */
 .bouton-personnalise:hover {
   border: 5px solid white !important; /* Change la bordure au survol */
@@ -22,6 +27,8 @@ body {
 
 
 
+=======
+>>>>>>> gestionAssurances
 .floatleft {
   float: left;
 }

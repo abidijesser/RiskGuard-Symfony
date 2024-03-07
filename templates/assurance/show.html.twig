@@ -1,0 +1,35 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Assurance Details{% endblock %}
+
+{% block back %}
+    <div class="container">
+        <h1 class="my-4 text-center">Assurance Details</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <dl class="row">
+
+                    <dt class="col-sm-3">Nom du Pack:</dt>
+                    <dd class="col-sm-9">{{ assurance.nomdupack }}</dd>
+
+                    <dt class="col-sm-3">Promotion du Pack:</dt>
+                    <dd class="col-sm-9">{{ assurance.promotiondupack }}</dd>
+
+                    <dt class="col-sm-3">Description:</dt>
+                    <dd class="col-sm-9">{{ assurance.description }}</dd>
+
+                    <dt class="col-sm-3">Type du Pack:</dt>
+                    <dd class="col-sm-9">{{ assurance.typedupack }}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_assurance_index') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-primary">Edit</a>
+        </div>
+
+        {{ include('assurance/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

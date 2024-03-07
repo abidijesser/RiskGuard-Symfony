@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assurancevehicule index{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="color: white; margin-bottom: 20px;">Assurancevehicule index</h1>
+
+    <div class="my-4" style="margin-top: 150px;"> <!-- Adjusted margin-top value -->
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <div style="margin-bottom: 20px;"> <!-- Added margin-bottom -->
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Marque</th>
+                        <th>Modele</th>
+                        <th>Matricule</th>
+                        <th>Datedebut</th>
+                        <th>Periodedevalidation</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for assurancevehicule in assurancevehicules %}
+                        <tr>
+                            <td>{{ assurancevehicule.id }}</td>
+                            <td>{{ assurancevehicule.marque }}</td>
+                            <td>{{ assurancevehicule.modele }}</td>
+                            <td>{{ assurancevehicule.matricule }}</td>
+                            <td>{{ assurancevehicule.datedebut ? assurancevehicule.datedebut|date('Y-m-d') : '' }}</td>
+                            <td>{{ assurancevehicule.periodedevalidation }}</td>
+                            <td>
+                                {% if assurancevehicule.image %}
+                                    <img src="{{ asset('uploads/images/' ~ assurancevehicule.image) }}" alt="Assurance Image" style="max-width: 100px; max-height: 100px;">
+                                {% else %}
+                                    No image available
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('app_assurancevehicule_showfrontt', {'id': assurancevehicule.id}) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ path('app_assurancevehicule_editfront', {'id': assurancevehicule.id}) }}" class="btn btn-success">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_assurancevehicule_newfront') }}" class="btn btn-primary">Create new</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assurance Details</title>
+    <style>
+        /* Define your PDF styles here */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        .info p {
+            margin: 10px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer p {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Assurance Details</h1>
+    </div>
+    <div class="info">
+        <p><strong>Nom du pack:</strong> {{ assurance.getNomdupack() }}</p>
+        <p><strong>Promotion du pack:</strong> {{ assurance.getPromotiondupack() }}</p>
+        <p><strong>Description:</strong> {{ assurance.getDescription() }}</p>
+        <p><strong>Type du pack:</strong> {{ assurance.getTypedupack() }}</p>
+        <!-- Add more fields as needed -->
+    </div>
+    <div class="footer">
+        <p>This is a sample assurance paper</p>
+    </div>
+</div>
+</body>
+</html>

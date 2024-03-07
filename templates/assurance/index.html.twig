@@ -1,0 +1,52 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Assurance index{% endblock %}
+
+{% block back %}
+    <h1 class="text-center" style="color: white;">Assurance list</h1>
+
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div>
+
+            <table class="table table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom du pack</th>
+                    <th>Promotion du pack</th>
+                    <th>Description</th>
+                    <th>Type du pack</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assurance in assurances %}
+                    <tr>
+                        <td>{{ assurance.id }}</td>
+                        <td>{{ assurance.nomdupack }}</td>
+                        <td>{{ assurance.promotiondupack }}</td>
+                        <td>{{ assurance.description }}</td>
+                        <td>{{ assurance.typedupack }}</td>
+                        <td>
+                            <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-success">Edit</a>
+                            <a href="{{ path('app_assurance_pdf', {'id': assurance.id}) }}" class="btn btn-success">pdf</a>
+
+                        </td>
+                    </tr>
+                {% else %}app_assurance_pdf
+                    <tr>
+                        <td colspan="6">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination justify-content-center">
+                {{ knp_pagination_render(assurances) }}
+            </div>
+            <a href="{{ path('app_assurance_new') }}" class="btn btn-primary">Create new</a>
+            <a href="{{ path('app_assurance_statmehdi') }}" class="btn btn-primary">stat </a>
+
+        </div>
+    </div>
+{% endblock %}

@@ -3,6 +3,10 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/src/Repository/tests" />
+>>>>>>> gestionAssurances
         <option value="$PROJECT_DIR$/tests" />
       </list>
     </option>

@@ -1,0 +1,62 @@
+{# app/templates/assurancevie_form.html.twig #}
+
+{{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+<div class="col-md-6">
+    {{ form_label(form.datedebut, 'Date début', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.datedebut, {'attr': {'class': 'form-control' ~ (form_errors(form.datedebut)|length ? ' is-invalid' : ''), 'id': 'validationCustomDateDebut'}}) }}
+    {% if form_errors(form.datedebut)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.datedebut) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.periodevalidation, 'Période de validation', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.periodevalidation, {'attr': {'class': 'form-control' ~ (form_errors(form.periodevalidation)|length ? ' is-invalid' : ''), 'id': 'validationCustomPeriodeValidation'}}) }}
+    {% if form_errors(form.periodevalidation)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.periodevalidation) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.salaireclient, 'Salaire client', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.salaireclient, {'attr': {'class': 'form-control' ~ (form_errors(form.salaireclient)|length ? ' is-invalid' : ''), 'id': 'validationCustomSalaireClient'}}) }}
+    {% if form_errors(form.salaireclient)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.salaireclient) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.fichedepaie, 'Fiche de paie', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.fichedepaie, {'attr': {'class': 'form-control' ~ (form_errors(form.fichedepaie)|length ? ' is-invalid' : ''), 'id': 'validationCustomFicheDepaie'}}) }}
+    {% if form_errors(form.fichedepaie)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.fichedepaie) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.reponse, 'commentaire', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.reponse, {'attr': {'class': 'form-control' ~ (form_errors(form.reponse)|length ? ' is-invalid' : ''), 'id': 'validationCustomReponse'}}) }}
+    {% if form_errors(form.reponse)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.reponse) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.assurance, 'Assurance', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.assurance, {'attr': {'class': 'form-control' ~ (form_errors(form.assurance)|length ? ' is-invalid' : ''), 'id': 'validationCustomAssurance'}}) }}
+    {% if form_errors(form.assurance)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.assurance) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-12">
+    <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

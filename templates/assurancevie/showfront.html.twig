@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assurance Vie Details{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4 text-center">Assurance Vie Details</h1>
+
+        <div class="card bg-light">
+            <div class="card-body">
+                <dl class="row">
+
+
+                    <dt class="col-sm-3">Date de début:</dt>
+                    <dd class="col-sm-9">{{ assurancevie.datedebut ? assurancevie.datedebut|date('Y-m-d') : '' }}</dd>
+
+                    <dt class="col-sm-3">Période de validation:</dt>
+                    <dd class="col-sm-9">{{ assurancevie.periodevalidation }}</dd>
+
+                    <dt class="col-sm-3">Salaire client:</dt>
+                    <dd class="col-sm-9">{{ assurancevie.salaireclient }}</dd>
+
+                    <dt class="col-sm-3">Fiche de paie:</dt>
+                    <dd class="col-sm-9">{{ assurancevie.fichedepaie }}</dd>
+
+                    <dt class="col-sm-3">commentaire:</dt>
+                    <dd class="col-sm-9">{{ assurancevie.reponse }}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_assurancevie_indexfront') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ path('app_assurancevie_edit', {'id': assurancevie.id}) }}" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+{% endblock %}

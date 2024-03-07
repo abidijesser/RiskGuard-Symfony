@@ -1,0 +1,43 @@
+{{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+<div class="col-md-6">
+    {{ form_label(form.nomdupack, 'Nom du pack', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.nomdupack, {'attr': {'class': 'form-control' ~ (form_errors(form.nomdupack)|length ? ' is-invalid' : (form.vars.valid ? ' is-valid' : '')), 'id': 'validationCustomNomDuPack'}}) }}
+    {% if form_errors(form.nomdupack)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.nomdupack) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.promotiondupack, 'Promotion du pack', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.promotiondupack, {'attr': {'class': 'form-control' ~ (form_errors(form.promotiondupack)|length ? ' is-invalid' : (form.vars.valid ? ' is-valid' : '')), 'id': 'validationCustomPromotionDuPack'}}) }}
+    {% if form_errors(form.promotiondupack)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.promotiondupack) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-12">
+    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control' ~ (form_errors(form.description)|length ? ' is-invalid' : (form.vars.valid ? ' is-valid' : '')), 'id': 'validationCustomDescription'}}) }}
+    {% if form_errors(form.description)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.description) }}
+        </div>
+    {% endif %}
+</div>
+<div class="col-12">
+    {{ form_label(form.typedupack, 'Type du pack', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.typedupack, {'attr': {'class': 'form-control' ~ (form_errors(form.typedupack)|length ? ' is-invalid' : (form.vars.valid ? ' is-valid' : '')), 'id': 'validationCustomTypeDuPack'}}) }}
+    {% if form_errors(form.typedupack)|length %}
+        <div class="invalid-feedback">
+            {{ form_errors(form.typedupack) }}
+        </div>
+    {% endif %}
+</div>
+
+<div class="col-12">
+    <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}
