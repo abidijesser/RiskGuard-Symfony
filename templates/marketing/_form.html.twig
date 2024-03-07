@@ -29,6 +29,10 @@
                         {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="mb-3">
+                        {{ form_label(form.categorie, 'Catégorie', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
                     {{ form_end(form) }}
                 </div>

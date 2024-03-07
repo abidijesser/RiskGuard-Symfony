@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Marketing;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +21,7 @@ class MarketingType extends AbstractType
             'constraints' => [
                 new Assert\NotBlank(),
                 new Assert\Length(['max' => 255]),
+                
             ],
         ])
         ->add('objectif', null, [
@@ -44,12 +47,16 @@ class MarketingType extends AbstractType
                     'mimeTypes' => [
                         'image/jpeg',
                         'image/png',
-                        // Add more allowed mime types as needed
                     ],
                     'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG)',
                 ]),
             ],
             ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'name', // Assuming 'name' is the property of Categorie entity you want to display in the dropdown
+                'placeholder' => 'Choose a category', // Optional placeholder
+            ]);
         ;
     }
 

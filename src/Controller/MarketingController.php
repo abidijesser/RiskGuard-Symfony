@@ -6,13 +6,17 @@ use App\Entity\Marketing;
 use App\Entity\Commentaire;
 use App\Form\MarketingType;
 use App\Form\CommentaireType;
+use App\Repository\CategorieRepository;
 use App\Repository\MarketingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 #[Route('/marketing')]
 class MarketingController extends AbstractController
@@ -26,8 +30,26 @@ class MarketingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            $fileName = 'marketing' . '-' . uniqid() . '.' . $imageFile->guessExtension();
+            $imageFile->move(
+                $this->getParameter('kernel.project_dir') . '/public/uploads/images',
+                $fileName
+            );
+
+            // check if date fin is lower than current date
+
+            if ($marketing->getDateFin() > new \DateTime()) {
+                $marketing->setStatus('Active');
+            } else {
+                $marketing->setStatus('Finished');
+            }
+
+            $marketing->setImage('uploads/' . '/images' . '/' . $fileName);
             $entityManager->persist($marketing);
             $entityManager->flush();
+
+            $marketingRepository->sms();
 
             return $this->redirectToRoute('app_marketing_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -37,13 +59,57 @@ class MarketingController extends AbstractController
         ]);
     }
 
+    #[Route('/pdf', name: 'PDF_marketing')]
+    public function pdf(MarketingRepository $marketingRepository)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Open Sans');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('marketing/pdf.html.twig', [
+            'marketings' => $marketingRepository->findAll(),
+        ]);
+
+        // Add header HTML to $html variable
+        $headerHtml = '<h1 style="text-align: center; color: #b00707;">Liste des evenements</h1>';
+        $html = $headerHtml . $html;
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        // Output the generated PDF to Browser (inline view)
+
+        $pdfContent = $dompdf->output();
+
+        $response = new Response(
+            $pdfContent,
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="evenements.pdf"',
+            ]
+        );
+    
+        return $response;
+
+    }
+
     #[Route('/', name: 'app_marketing_indexx')]
-    public function index(MarketingRepository $marketingRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function index(MarketingRepository $marketingRepository, CategorieRepository $categorieRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $marketings = $marketingRepository->findAll();
+        $categories = $categorieRepository->findAll();
+
         
         return $this->render('marketing/Marketing_client.html.twig', [
             'marketings' => $marketings,
+            'categories' => $categories,
         ]);
     }
 

@@ -7,29 +7,31 @@
 <div class="card">
                 <div class="card-body">
 
-    <table class="table table-striped">
+    <table class="table table">
         <thead>
             <tr>
-                <th style="width: 5%;">Id</th>
-                <th style="width: 15%;">Titre</th>
-                <th style="width: 15%;">Objectif</th>
-                <th style="width: 10%;">Budget</th>
-                <th style="width: 10%;">DateDebut</th>
-                <th style="width: 10%;">DateFin</th>
-                <th style="width: 10%;">Image</th>
-                <th style="width: 25%;">Actions</th>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Objectif</th>
+                <th>Budget</th>
+                <th>Status</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for marketing in marketings %}
             <tr>
                 <td>{{ marketing.id }}</td>
-                <td>{{ marketing.titre }}</td>
-                <td>{{ marketing.objectif }}</td>
+                <td style="max-width: 30px; overflow: hidden; text-overflow: ellipsis;">{{ marketing.titre }}</td>
+                <td style="max-width: 40px; overflow: hidden; text-overflow: ellipsis;">{{ marketing.objectif }}</td>
                 <td>{{ marketing.budget }}</td>
+                <td>{% if marketing.status == 'Finished' %} <label style="color: white; padding: 3px; background-color: red; border-radius: 5px;">Finished</label> {% elseif marketing.status == 'Active' %} <label class="bg-success" style="color: white; padding: 3px; border-radius: 5px;">Active</label> {% endif %} </td>
                 <td>{{ marketing.dateDebut ? marketing.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ marketing.dateFin ? marketing.dateFin|date('Y-m-d') : '' }}</td>
-                <td><img src="{{ marketing.image }}" alt="Marketing Image" style="max-width: 100px;"></td>
+                <td><img src="{{ asset(marketing.image) }}" alt="Marketing Image" style="max-width: 100px;"></td>
                 <td>
                     <a href="{{ path('app_marketing_show', {'id': marketing.id}) }}">Show</a>
                     <a href="{{ path('app_marketing_edit', {'id': marketing.id}) }}">Edit</a>

@@ -1,0 +1,85 @@
+{% extends 'base_back.html.twig' %}
+{% block content %}
+<main class="main-content position-relative border-radius-lg ">
+    {% include 'marketing/navbar.html.twig' %}
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Categorie table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">Id</th>
+                                        <th style="width: 85%;">Name</th>
+                                        <th style="width: 10%;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for categorie in categories %}
+                                    <tr>
+                                        <td>{{ categorie.id }}</td>
+                                        <td>{{ categorie.name }}</td>
+                                        <td>
+                                            <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Edit</a>
+                                            <a href="{{ path('app_categorie_delete', {'id': categorie.id}) }}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="8">No records found</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <h5 class="card-title text-center mb-4">Add new category</h5>
+                    {% include 'categorie/new.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>,
+                            RiskGuard Team <i class=""></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
+                                    target="_blank">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
+                                    target="_blank">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
+                                    target="_blank">License</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</main>
+{% endblock %}

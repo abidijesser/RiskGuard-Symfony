@@ -32,6 +32,10 @@ class CommentaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($commentaire);
             $entityManager->flush();
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+            );
 
             return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
         }

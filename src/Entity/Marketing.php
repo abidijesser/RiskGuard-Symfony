@@ -37,6 +37,12 @@ class Marketing
     #[ORM\OneToMany(mappedBy: 'marketing', targetEntity: Commentaire::class, orphanRemoval: true)]
     private Collection $commentaires;
 
+    #[ORM\ManyToOne(inversedBy: 'marketing')]
+    private ?Categorie $categorie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -145,6 +151,30 @@ class Marketing
                 $commentaire->setMarketing(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
