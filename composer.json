@@ -1,6 +1,8 @@
 {
+    "name": "symfony/skeleton",
     "type": "project",
     "license": "proprietary",
+    "description": "A minimal Symfony project recommended to create bare bones applications",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -8,14 +10,21 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^2.0",
+        "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
-        "mercuryseries/flashy-bundle": "^5.1",
+        "dompdf/dompdf": "^2.0",
+        "knplabs/knp-paginator-bundle": "^5.9",
+        "knplabs/knp-snappy": "^1.5",
+        "knplabs/knp-snappy-bundle": "^1.10",
         "phpdocumentor/reflection-docblock": "^5.3",
+        "mercuryseries/flashy-bundle": "^5.1",
         "phpstan/phpdoc-parser": "^1.24",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "5.4.*",
+        "symfony/asset-mapper": "*",
+
         "symfony/console": "5.4.*",
         "symfony/doctrine-messenger": "5.4.*",
         "symfony/dotenv": "5.4.*",
@@ -27,6 +36,7 @@
         "symfony/http-client": "5.4.*",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
+
         "symfony/mime": "5.4.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/notifier": "5.4.*",
@@ -39,12 +49,17 @@
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
         "symfony/translation": "5.4.*",
+        "symfony/stimulus-bundle": "^2.15",
         "symfony/twig-bundle": "5.4.*",
+        "symfony/twilio-notifier": "5.4.*",
+        "symfony/ux-turbo": "^2.15",
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^7.16"
+
     },
     "config": {
         "allow-plugins": {
@@ -96,13 +111,14 @@
         }
     },
     "require-dev": {
+
         "doctrine/doctrine-fixtures-bundle": "*",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^6.3",
+        "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "5.4.*",
         "symfony/web-profiler-bundle": "5.4.*"
     }

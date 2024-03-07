@@ -1,0 +1,81 @@
+{% extends 'base2.html.twig' %}
+{% block title %}Modifier une réclamation{% endblock %}
+
+{% block asidee %}
+
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-5 fixed-start ms-2 " id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="{{ path('back') }}">
+                <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100 width=100 height=380" alt="main_logo">
+                <span class="ms-1 font-weight-bold">RiskGuard</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('back') }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('display_reclamation') }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reclamations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('display_reponse') }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reponses</span>
+                    </a>
+            </ul>
+        </div>
+    </aside>
+{% endblock%}
+{% block main %}
+    <br><br><br>
+    <main class="main-content position-relative border-radius-lg d-flex justify-content-center align-items-center">
+        <br><br><br><br><br>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header pb-0 text-center"> {# Ajoutez la classe text-center #}
+                    <h6 class="mb-2">Modifier Reclamation</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    {{ form_start(f) }}
+                    <div class="mb-3">
+                        {{ form_label(f.nom_client, 'Nom du Client', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(f.nom_client, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(f.email_client, 'Email du Client', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(f.email_client, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(f.num_tel, 'Numero_tel du Client', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(f.num_tel, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(f.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(f.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_widget(f.id_reclamation) }} {# Hidden field for the ID #}
+                    <div class="text-center"> {# Ajoutez la classe text-center #}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(f) }}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+

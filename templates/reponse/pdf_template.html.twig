@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Template</title>
+    <!-- Incluez vos styles CSS ici si nécessaire -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+        .bg-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .text-black {
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+<h1>RiskGuard : Réponses aux réclamations</h1>
+<table id="reclamation-reponse-table">
+    <thead>
+    <tr>
+        <th>Réclamation</th>
+        <th>Nom du client</th>
+        <th>Réponse</th>
+        <th>Date de réponse</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for reponse in reponses %}
+        <tr>
+            <td class="bg-primary text-black">{{ reponse.getDescription() }}</td>
+            <td class="bg-primary text-black">{{ reponse.getNomClient() }}</td>
+            <td class="bg-primary text-black"><textarea readonly>{{ reponse.getContenu() }}</textarea></td>
+            <td class="bg-primary text-black">{{ reponse.getDate()|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
