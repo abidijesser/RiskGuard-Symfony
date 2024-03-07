@@ -1,0 +1,54 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Sorted Constatvie List{% endblock %}
+
+{% block back %}
+    <div class="container mt-4">
+        <h1 style="color: white;">Sorted Constatvie List</h1>
+
+        <div class="table-responsive">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+
+
+            <table class="table table-bordered table-hover mt-4 mb-4">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Cin</th>
+                    <th scope="col">Date de Deces</th>
+                    <th scope="col">Cause de Deces</th>
+                    <th scope="col">Identifiant de l'informant</th>
+                    {# Add additional table headers as needed #}
+                </tr>
+                </thead>
+                <tbody>
+                {% for constatvie in constatvies %}
+                    <tr>
+                        <td>{{ constatvie.ID }}</td>
+                        <td>{{ constatvie.Nom }}</td>
+                        <td>{{ constatvie.Prenom }}</td>
+                        <td>{{ constatvie.CIN }}</td>
+                        <td>{{ constatvie.DateDeDeces|date('Y-m-d') }}</td>
+                        <td>{{ constatvie.CauseDeDeces }}</td>
+                        <td>{{ constatvie.IdentifiantDeLinformant }}</td>
+                        {# Add additional table data as needed #}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">No Constatvie found.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

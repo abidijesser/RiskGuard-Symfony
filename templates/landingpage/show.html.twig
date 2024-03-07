@@ -1,0 +1,355 @@
+
+
+{% block body %}
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <div class="container">
+        <h1 style="color: #333; font-family: Arial, sans-serif; font-size: 2.5rem; text-align: center; text-transform: uppercase; padding: 20px; background-color: #f0f0f0;">Constat:</h1>
+
+
+        {% if constat_vie is not null %}
+            <h2>Constat Vie</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Id</th>
+                            <td>{{ constat_vie.id }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nom</th>
+                            <td>{{ constat_vie.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prenom</th>
+                            <td>{{ constat_vie.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CIN</th>
+                            <td>{{ constat_vie.CIN }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date de Décès</th>
+                            <td>{{ constat_vie.DateDeDeces|date('Y-m-d') }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cause de Décès</th>
+                            <td>{{ constat_vie.CauseDeDeces }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Identifiant de l'Informant</th>
+                            <td>{{ constat_vie.IdentifiantDeLinformant }}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class="d-flex">
+                    <!-- Edit button -->
+                    <a href="#" class=" fs-5 w-40 btn btn-primary d-flex justify-content-center align-items-center rounded mr-5" onclick="openEditModal('{{ constat_vie.id }}', '{{ constat_vie.nom }}')">Edit</a>
+                    <div class="mx-2"></div>
+
+
+                    
+                   <!-- Modal -->
+<div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #FADBD8 ">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de supprimer {{ constat_vie.nom | capitalize }},{{ constat_vie.prenom | capitalize }} ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <a id="deleteButton" href="#" type="button" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete button -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" class="fs-5 w-30 btn btn-danger d-flex justify-content-center align-items-center rounded mr-5" style="width: 100px; height: 100%;">
+    delete
+</button>
+
+<script>
+document.getElementById("deleteButton").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default action of clicking the link
+
+    if (confirm("Are you sure you want to delete this constat?")) {
+        var deletePath = "{{ path('constatvie_delete', {'id': constat_vie.id}) }}";
+        window.location.href = deletePath;
+    }
+});
+
+</script>
+
+                    
+
+
+                    
+                    <!-- Space between buttons -->
+                    
+                </div>
+                
+                <!-- Modal for editing -->
+                <form id="editConstatVieForm" action="{{ path('constat_vie_update', {'id': constat_vie.id}) }}" method="POST">            
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- Modal content for editing -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modifyTitle">Edit Constat Vie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" name="nom" id="nomInput" class="form-control border-primary" placeholder="Nom">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="prenom" id="prenomInput" class="form-control border-primary" placeholder="Prenom">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="number" name="cin" id="cinInput" class="form-control border-primary" placeholder="CIN">
+                                        </div>
+                                        <div class="col">
+                                            <input type="date" name="dateDeDeces" id="dateDeDecesInput" class="form-control border-primary" placeholder="Date de décès">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="text" name="causeDeDeces" id="causeDeDecesInput" class="form-control border-primary" placeholder="Cause de décès">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="identifiantDeLinformant" id="identifiantDeLinformantInput" class="form-control border-primary" placeholder="Identifiant de l'informant">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateConstatVie()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                <div > 
+   
+                    <img  style=" max-width: 150px;  height: auto; margin-left:1000px" src="../assets/img/about/1.png" alt="logo" class="img-fluid logo">
+                  </div>
+                <script>
+                    function openEditModal(constatVieId, constatVieNom) {
+                        // Set constat vie details in the modal
+                        document.getElementById('nomInput').value = constatVieNom;
+                        // Show the modal
+                        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                        modal.show();
+                    }
+                
+                    function updateConstatVie() {
+                        // Submit the form
+                        document.getElementById('editConstatVieForm').submit();
+                    }
+                </script>
+                
+                
+                
+        {% endif %}
+    
+
+
+
+        {% if constat_vehicule is not null %}
+            <h2 style=" margin-left:105px;">Constat Vehicule</h2>
+            <div class="table-responsive" style="width:100%; margin-left:105px;">
+                <table class="table" >
+                    <tbody>
+                        <tr>
+                            <th scope="row">Id</th>
+                            <td>{{ constat_vehicule.id }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nom</th>
+                            <td>{{ constat_vehicule.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prenom</th>
+                            <td>{{ constat_vehicule.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CIN</th>
+                            <td>{{ constat_vehicule.CIN }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Type de Vehicule</th>
+                            <td>{{ constat_vehicule.TypeVehicule }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Marque</th>
+                            <td>{{ constat_vehicule.marque }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Matricule</th>
+                            <td>{{ constat_vehicule.matricule }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Lieu</th>
+                            <td>{{ constat_vehicule.lieu }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date</th>
+                            <td>{{ constat_vehicule.date|date('Y-m-d') }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description</th>
+                            <td>{{ constat_vehicule.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="d-flex">
+                    <!-- Edit button -->
+                    <a href="#" class="fs-5 w-40 btn btn-primary d-flex justify-content-center align-items-center rounded mr-5" onclick="openEditModal('{{ constat_vehicule.id }}', '{{ constat_vehicule.nom }}')">Edit</a>
+                    <div class="mx-2"></div>
+
+
+
+                    <!-- Delete button -->
+                  <!-- Modal -->
+<div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #FADBD8 ">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de supprimer {{ constat_vehicule.nom | capitalize }},{{ constat_vehicule.prenom | capitalize }} ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <a id="deleteButton" href="#" type="button" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete button -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" class="fs-5 w-30 btn btn-danger d-flex justify-content-center align-items-center rounded mr-5" style="width: 100px; height: 100%;">
+    delete
+</button>
+
+<script>
+document.getElementById("deleteButton").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default action of clicking the link
+
+    if (confirm("Are you sure you want to delete this constat vehicule?")) {
+        var deletePath = "{{ path('constatvehicule_delete', {'id': constat_vehicule.id}) }}";
+        window.location.href = deletePath;
+    }
+});
+</script>
+
+                    
+
+
+
+                    <!-- Space between buttons -->
+                    <div class="mx-2"></div>
+                </div>
+                
+
+
+
+                <!-- Modal for editing -->
+
+
+                <form id="editConstatVehiculeForm" action="{{ path('constat_vehicule_update', {'id': constat_vehicule.id}) }}" method="POST">            
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+                        <!-- Modal content for editing -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modifyTitle">Edit Constat Vehicule</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" name="prenom" id="prenomInput" class="form-control border-primary" placeholder="Prenom">
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" name="cin" id="cinInput" class="form-control border-primary" placeholder="CIN">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="text" name="typeVehicule" id="typeVehiculeInput" class="form-control border-primary" placeholder="Type de véhicule">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="marque" id="marqueInput" class="form-control border-primary" placeholder="Marque">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="text" name="matricule" id="matriculeInput" class="form-control border-primary" placeholder="Matricule">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="lieu" id="lieuInput" class="form-control border-primary" placeholder="Lieu">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="date" name="date" id="dateInput" class="form-control border-primary" placeholder="Date">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="description" id="descriptionInput" class="form-control border-primary" placeholder="Description">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateConstatVehicule()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <script>
+                    function openEditModal(constatVehiculeId, constatVehiculeNom) {
+                        // Set constat vehicule details in the modal
+                        document.getElementById('prenomInput').value = constatVehiculeNom;
+                        // Show the modal
+                        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                        modal.show();
+                    }
+                
+                    function updateConstatVehicule() {
+                        // Submit the form
+                        document.getElementById('editConstatVehiculeForm').submit();
+                    }
+                </script>
+                </div>
+                <div > 
+   
+                    <img  style=" max-width: 150px;  height: auto; margin-left:1000px" src="../assets/img/about/1.png" alt="logo" class="img-fluid logo">
+                  </div>
+            
+        {% endif %}
+    
+    {% endblock %}
+    
+
+
+</body></html>

@@ -1,0 +1,50 @@
+{# templates/constatvie/index.html.twig #}
+
+{% extends 'baseBack.html.twig' %}
+{% block title %}Liste des Constats Vie{% endblock %}
+
+{% block back %}
+    <h1 style="color: white;">Liste des Constats Vie</h1>
+    <a href="{{ path('app_constatvie_sort') }}" class="btn btn-primary mb-3">Sort by Date de Deces</a>
+    <div class="table-responsive">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Cin</th>
+                <th scope="col">Date de Deces</th>
+                <th scope="col">Cause de Deces</th>
+                <th scope="col">Identifiant de l'informant</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for constatvie in constatvies %}
+                <tr>
+                    <th scope="row">{{ constatvie.id }}</th>
+                    <td>{{ constatvie.Nom }}</td>
+                    <td>{{ constatvie.Prenom }}</td>
+                    <td>{{ constatvie.CIN }}</td>
+                    <td>{{ constatvie.DateDeDeces ? constatvie.DateDeDeces|date('Y-m-d') : '' }}</td>
+                    <td>{{ constatvie.CauseDeDeces }}</td>
+                    <td>{{ constatvie.IdentifiantDeLinformant }}</td>
+                    <td>
+                        <a href="{{ path('app_cosntat_pdf', {'id': constatvie.id}) }}" class="btn btn-success">PDF</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun constat vie trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

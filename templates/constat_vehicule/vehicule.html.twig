@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de constat de véhicule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+           
+        }
+        .form-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border: 2px solid black; /* Changed border to 2px solid blue */
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select,
+        input[type="file"] {
+            width: calc(100% - 16px); /* Adjusted width for padding */
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid blue; /* Added blue border */
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="date"] {
+            width: calc(100% - 16px); /* Adjusted width for padding */
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid blue; /* Added blue border */
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Crect x="3" y="4" width="18" height="18" rx="2" ry="2"%3E%3C/rect%3E%3Cline x1="16" y1="2" x2="16" y2="6"%3E%3C/line%3E%3Cline x1="8" y1="2" x2="8" y2="6"%3E%3C/line%3E%3Cline x1="4" y1="10" x2="20" y2="10"%3E%3C/line%3E%3Cline x1="4" y1="14" x2="20" y2="14"%3E%3C/line%3E%3Cline x1="10" y1="18" x2="14" y2="18"%3E%3C/line%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 20px 20px;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: blue;
+        }
+
+        /* Style for the logo */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="logo-container">
+    <img src="../assets/img/about/1.png" alt="logo" class="logo">
+</div>
+<div class="form-container">
+    <h1>Constat de Véhicule</h1>
+    <form action="{{ path('app_constat_vehicule_new') }}" method="post">
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.CIN) }}
+        {{ form_row(form.TypeVehicule) }}
+        {{ form_row(form.marque) }}
+        {{ form_row(form.matricule) }}
+        {{ form_row(form.lieu) }}
+        <label for="date"></label>
+        {{ form_row(form.date) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.photo) }}
+        <input type="submit" value="Soumettre">
+        {{ form_end(form) }}
+    </form>
+</div>
+</body>
+</html>

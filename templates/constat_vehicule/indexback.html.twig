@@ -1,0 +1,74 @@
+{# templates/assurancevehicule/indexback.html.twig #}
+
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des Constats Vehicules{% endblock %}
+
+{% block back %}
+    <div class="container">
+        <h1 style="color: white;">Liste des Constats Vehicules</h1>
+        <div class="container mb-4">
+            <form action="{{ path('app_constatVehicule_indexbackkkk') }}" method="get" class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" id="search" name="search" class="form-control rounded-pill" placeholder="Search..." required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary rounded-pill">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>CIN</th>
+                    <th>Type Vehicule</th>
+                    <th>Marque</th>
+                    <th>Matricule</th>
+                    <th>Lieu</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Actions</th> {# Add a new column for actions #}
+                </tr>
+                </thead>
+                <tbody>
+                {% for constat in constatVehicule %}
+                    <tr>
+                        <td>{{ constat.Nom}}</td>
+                        <td>{{ constat.Prenom}}</td>
+                        <td>{{ constat.CIN }}</td>
+                        <td>{{ constat.TypeVehicule }}</td>
+                        <td>{{ constat.marque }}</td>
+                        <td>{{ constat.matricule }}</td>
+                        <td>{{ constat.lieu }}</td>
+                        <td>{{ constat.date ? constat.date|date('Y-m-d') : '' }}</td>
+                        <td>{{ constat.description }}</td>
+                        <td>
+
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun constat vehicule trouvé.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div class="pagination justify-content-center">
+            {{ knp_pagination_render(constatVehicule) }}
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <a href="{{ path('stats') }}" class="btn btn-primary">Go to Stats Page</a>
+    </div>
+
+{% endblock %}
