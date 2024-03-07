@@ -1,0 +1,29 @@
+{% extends 'base_back.html.twig' %}
+{% block content %}
+    <main class="main-content position-relative border-radius-lg ">
+     {% include 'marketing/navbar.html.twig' %}
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+            
+            
+          <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+<div class="d-flex flex-column">
+<h6 class="mb-3 text-sm">{{marketing.titre}}</h6>
+<img src="{{ asset(marketing.image) }}" style="width:150px ;height:150px;margin-bottom:20px">
+<span class="mb-2 text-xs">Objectif: <span class="text-dark font-weight-bold ms-sm-2">{{marketing.objectif}}</span></span>
+<span class="mb-2 text-xs">Budget: <span class="text-dark ms-sm-2 font-weight-bold">{{marketing.budget}}</span></span>
+<span class="text-xs">date debut: <span class="text-dark ms-sm-2 font-weight-bold">{{marketing.dateDebut|date('y-m-d')}}</span></span>
+<span class="text-xs">date fin: <span class="text-dark ms-sm-2 font-weight-bold">{{marketing.dateFin|date('y-m-d')}}</span></span>
+
+</div>
+
+</li>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+{% endblock %}
+  
+  

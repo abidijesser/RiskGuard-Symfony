@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Cards</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    section {
+      margin-top: 100px;
+    }
+  </style>
+  <!-- Favicons -->
+  <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="{{asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900')}}"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+</head>
+
+<body>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo">
+        <h1><img style=" max-width: 150px;  height: auto;" src="{{asset('assets/img/about/1.png')}}" alt="logo"
+            class="img-fluid logo"><a href="{{path('app_marketing_template')}}"><span>Risk</span>Guard</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">A Propos</a></li>
+          <li><a class="nav-link scrollto" href="#services">Nos Services</a></li>
+          <li><a class="nav-link scrollto" href="#team">Notre Equipe</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+  <section>
+    <main class="main-content position-relative border-radius-lg ">
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-12">
+            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+              <div class="d-flex flex-column">
+                <h6 class="mb-3 text-sm">{{marketing.titre}}</h6>
+                <img src="{{ asset(marketing.image) }}" style="width:150px ;height:150px;margin-bottom:20px">
+                <span class="mb-2 text-xs">Objectif: <span
+                    class="text-dark font-weight-bold ms-sm-2">{{marketing.objectif}}</span></span>
+                <span class="mb-2 text-xs">Budget: <span
+                    class="text-dark ms-sm-2 font-weight-bold">{{marketing.budget}}</span></span>
+                <span class="text-xs">date debut: <span
+                    class="text-dark ms-sm-2 font-weight-bold">{{marketing.dateDebut|date('y-m-d')}}</span></span>
+                <span class="text-xs">date fin: <span
+                    class="text-dark ms-sm-2 font-weight-bold">{{marketing.dateFin|date('y-m-d')}}</span></span>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% set currentDate = "now"|date("Y-m-d") %}
+    <div style="padding: 20px">
+      <h3>Commentaires : {{ marketing.commentaires|length }}</h3>
+      <hr>
+      {% for comment in marketing.commentaires %}
+      <div class="col-12"
+        style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column;">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 text-xs" style="font-weight: bold;">Author:<span
+              class="text-dark font-weight-bold ms-sm-2">{{comment.author}}</span></span>
+          <span class="text-dark font-weight-bold ms-sm-2">{{comment.timeStamp|date('y-m-d')}}</span>
+        </div>
+        <span class="mb-2 mt-2 text-xs" style="font-weight: bold;"><span
+            class="text-dark font-weight-bold ms-sm-2">{{comment.content}}</span></span>
+      </div>
+      {% endfor %}
+      {% if marketing.dateFin|date("Y-m-d") < currentDate %}
+      <div class="alert alert-danger" role="alert">
+        Cet événement a expiré. Vous ne pouvez pas poster de commentaire.
+      </div>
+      {% else %}
+      <div class="col-12">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            {{ form_start(form) }}
+            <div class="mb-3">
+              {{ form_label(form.author, 'nom', {'label_attr': {'class': 'form-label'}}) }}
+              {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+              {{ form_label(form.content, 'commentaire', {'label_attr': {'class': 'form-label'}}) }}
+              {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% include 'marketing/footer.html.twig' %}
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

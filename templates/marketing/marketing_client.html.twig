@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cards</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here if needed */
+        section {
+            margin-top: 100px; /* Add margin-top to create space between header and section */
+        }
+    </style>
+</head>
+<body>
+
+{% include 'marketing/header.html.twig' %}
+
+<section>
+
+    <div class="container">
+        <div class="row">
+        {% for category in categories %}
+            <div class="col-md-auto mb-2">
+                <button type="button" class="btn btn-outline-primary category-filter" data-category="{{ category.name }}">{{ category.name }}s</button>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% for m in marketings %}
+            <div class="col-md-4 mb-4 marketing-card" data-categorie="{{ m.categorie.name }}">
+                <div class="card"  style="height: 250px;">
+                    <div class="card-body">
+                        <td><img src="{{ asset(m.image) }}" alt="Marketing Image" style="max-width: 100px; max-height: 100px;"></td>
+                        <h5 class="card-title">{{m.titre}}</h5>
+                        <p class="card-text">{{m.objectif}}</p>
+                        <a href="{{ path('app_front_marketing_show', {'id': m.id}) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% include 'marketing/footer.html.twig' %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        //$('.category-filter').first().addClass('active');
+
+        $('.category-filter').click(function(){
+            $('.category-filter').removeClass('active');
+            $(this).addClass('active');
+            
+            var category = $(this).data('category');
+            $('.marketing-card').hide();
+            $('.marketing-card').each(function(){
+                var categories = $(this).data('categorie');
+                if(categories.includes(category)){
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    
+                    {{ form_start(form) }}
+                    <div class="mb-3">
+                        {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.objectif, 'Objectif', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.objectif, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.budget, 'Budget', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.budget, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.dateDebut, 'Date Debut', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.dateFin, 'Date Fin', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.categorie, 'Catégorie', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

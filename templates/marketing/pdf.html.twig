@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Objectif</th>
+            <th>Budget</th>
+            <th>DateDebut</th>
+            <th>DateFin</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for marketing in marketings %}
+        <tr>
+            <td>{{ marketing.titre }}</td>
+            <td>{{ marketing.objectif }}</td>
+            <td>{{ marketing.budget }}</td>
+            <td>{{ marketing.dateDebut ? marketing.dateDebut|date('Y-m-d') : '' }}</td>
+            <td>{{ marketing.dateFin ? marketing.dateFin|date('Y-m-d') : '' }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="8">No records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
