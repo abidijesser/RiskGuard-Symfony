@@ -186,6 +186,20 @@ class MarketingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+
+            // Only process if a new image file is uploaded
+            if ($imageFile instanceof UploadedFile) {
+                $fileName = 'marketing' . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/uploads/images',
+                    $fileName
+                );
+
+                // Update the 'image' property to store the new file name
+                $marketing->setImage('uploads/images/' . $fileName);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_marketing_index');
