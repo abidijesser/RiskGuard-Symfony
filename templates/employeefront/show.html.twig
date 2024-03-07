@@ -1,0 +1,34 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Departments{% endblock %}
+
+{% block employe %}
+    <h1>Departments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ department.id }}</td>
+            </tr>
+            <tr>
+                <th>Local</th>
+                <td>{{ department.local }}</td>
+            </tr>
+            <tr>
+                <th>Chef_dep</th>
+                <td>{{ department.chefDep }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ department.code }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_departments_index') }}">back to list</a>
+
+    <a href="{{ path('app_departments_edit', {'id': department.id}) }}">edit</a>
+
+    {{ include('departments/_delete_form.html.twig') }}
+{% endblock %}

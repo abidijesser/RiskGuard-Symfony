@@ -1,0 +1,84 @@
+
+{% block employe %}
+    <div align="center">
+        <img src="{{asset('/assetsback/img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+    </div>
+    
+    <h1 align="center" style="color: blue;">Liste des Employees</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.nom }}</td>
+                    <td>{{ employee.email }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: #fff;
+            color: #212529;
+            border: 1px solid #dee2e6;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+    </style>
+
+
+<h1 style="color: blue;">
+Pour plus d'informations :</h1>
+
+
+
+<h1 style="color: blue;">
+Tel: +216 28 124 816 </h1>
+
+<h1 style="color: blue;">
+Email: Riskguard@gmail.com </h1>
+
+<h1 style="color: blue;">
+Heures de travail : 09h-17h</h1>
+
+
+
+{% endblock %}
