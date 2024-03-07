@@ -50,7 +50,7 @@ class LandingpageController extends AbstractController
  
     
 
-    #[Route('/{id}', name: 'app_constat_show', methods: ['GET'])]
+    #[Route('/{id<\d+>}', name: 'app_constat_show', methods: ['GET'])]
 public function show(int $id): Response
     
 {

@@ -91,7 +91,7 @@ class AssurancevehiculeController extends AbstractController
 
         return $this->render('assurancevehicule/newfrontvehicule.html.twig', [
             'assurancevehicule' => $assurancevehicule,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

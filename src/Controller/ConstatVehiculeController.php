@@ -70,7 +70,7 @@ class ConstatVehiculeController extends AbstractController
         $constatVehicule = $paginator->paginate(
             $query, // Query to paginate
             $request->query->getInt('page', 1), // Page number
-           2
+           4
         // Items per page
         );
 

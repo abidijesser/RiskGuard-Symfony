@@ -131,7 +131,7 @@ class AssuranceController extends AbstractController
 
         return $this->render('assurance/edit.html.twig', [
             'assurance' => $assurance,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

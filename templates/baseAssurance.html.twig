@@ -56,21 +56,18 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">les Constats</span>
-
-
-
-                    <ul class="nav flex-column sub-menu" id="assurancesSubMenu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_constatvie_indexback') }}">Constat vie</a>
-                            <a href="{{ path('app_constatvie_indexback') }}"><button style="display: inline-block; padding: 8px 16px; background-color: #007bff; color: #fff; text-decoration: none; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Constats Vie</button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_constatVehicule_indexbackkkk') }}">Constat véhicule</a>
-                            <a href="{{ path('app_constatVehicule_indexbackkkk') }}"><button style="display: inline-block; padding: 8px 16px; background-color: #007bff; color: #fff; text-decoration: none; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;"> Constats Vehicule</button></a>
-                        </li>
-                    </ul>
-                    
+                    <span class="nav-link-text ms-1">Assurance</span>
+                </a>
+                <ul class="nav flex-column sub-menu" id="assurancesSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_assurancevie_index') }}">assurance vie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_assurancevehicule_index') }}">assurance vehicule</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
 
     </div>
 </aside>

@@ -73,7 +73,7 @@ class AssurancevieController extends AbstractController
 
         return $this->render('assurancevie/newfront.html.twig', [
             'assurancevie' => $assurancevie,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
