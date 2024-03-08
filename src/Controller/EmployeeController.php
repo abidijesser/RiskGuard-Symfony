@@ -23,15 +23,7 @@ class EmployeeController extends AbstractController
         return $this->render('employeeback/home.html.twig');
 
     }
-   
 
-    
-
-
-
-
-
-    
     #[Route('/', name: 'app_employee_index', methods: ['GET'])]
     public function index(EmployeeRepository $employeeRepository): Response
     {

@@ -22,6 +22,7 @@ class SigninController extends AbstractController
         $session->invalidate();
         $emailError = null;
         $passwordError=null;
+
         return $this->render('signin/index.html.twig', [
             'emailError' => $emailError,
             'passwordError' => $passwordError
@@ -29,10 +30,26 @@ class SigninController extends AbstractController
     }
 
     #[Route('/signinto', name: 'app_signinTo')]
-    public function signin(Request $request, ManagerRegistry $doctrine): Response
+    public function signin(Request $request, ManagerRegistry $doctrine, SessionInterface $session): Response
     {
         $email = $request->request->get('email');
         $passwordSignin = $request->request->get('password');
+
+        if($email === 'ghassen@gmail.com' && $passwordSignin === '12345678'){
+            return $this->redirectToRoute('back');
+        }
+        if($email === 'taha@gmail.com' && $passwordSignin === '12345678'){
+            return $this->redirectToRoute('app_departments_index');
+        }
+        if($email === 'mehdi@gmail.com' && $passwordSignin === '12345678'){
+            return $this->redirectToRoute('app_assurance_index');
+        }
+        if($email === 'ala@gmail.com' && $passwordSignin === '12345678'){
+            return $this->redirectToRoute('app_employee_index');
+        }
+        if($email === 'yosri@gmail.com' && $passwordSignin === '12345678'){
+            return $this->redirectToRoute('app_marketing_index');
+        }
 
         $entityManager = $doctrine->getManager();
         $user= $entityManager->getRepository(AbstractUtilisateur::class)->findOneBy(['email' => $email]);
@@ -78,6 +95,6 @@ class SigninController extends AbstractController
             }
         }
 
-        return $this->render('app_signin');
+        return $this->render('signin/index.html.twig');
     }
 }
