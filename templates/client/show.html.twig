@@ -1,9 +1,9 @@
 {%  extends 'admindashboard/dashboardAdmin.html.twig' %}
 {% block content %}
-
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
     {% block title %}
         Modifier {{client.nom}}
@@ -165,7 +165,11 @@
                         // Submit the form
                     document.getElementById('updateClient').submit();
                 }
-            </script>          
+            </script>
+
+        <script src="//code.jquery.com/jquery.js"></script>
+        <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
   
     {% endblock %}
 

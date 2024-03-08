@@ -68,7 +68,7 @@ class SigninController extends AbstractController
             $clientPassword = $user->getMotDePasse();
 
             if ($clientPassword == $passwordSignin) {
-                return $this->redirectToRoute('riskguard_app');
+                return $this->redirectToRoute('display_home');
 
             } else {
                 $passwordError = "Mot de passe est incorrecte.";

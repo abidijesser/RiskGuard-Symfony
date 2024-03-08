@@ -4,7 +4,7 @@
   	<title>S'inscrire</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -192,6 +192,16 @@
 													<div class="error-message">Votre télephone doit contenir exactement <b>8 </b> chiffres. </div>
 												</div>
 											</div>
+
+											<div id="telephoneStartError" style="border: 1px solid red; border-radius:3px; margin-top:10px; padding-left:4px; padding:3px; display: none;">
+												<div class="error-container">
+													<div class="icon-container">
+														<i class="fas fa-exclamation" style="color: white;"></i>
+													</div>
+													<div class="error-message">Votre télephone doit commencer avec
+														<b>2</b> ou <b>4</b> ou <b>5</b> ou <b>9</b> . </div>
+												</div>
+											</div>
 										
 										</div>
 									</div>
@@ -370,6 +380,7 @@
 		let myForm= document.getElementById('myform');
 		let myRegex = /^[a-zA-Z-\s]+$/ ;
 		let numberRegex = /^\d{8}$/;
+		let telephoneRegexStart=/^([2459])/;
 
 		myForm.addEventListener('submit', function(e) {
 			let nomInput= document.getElementById('nom');
@@ -458,6 +469,10 @@
 				let telephoneFormatError = document.getElementById('telephoneFormatError');
 				telephoneFormatError.style.display = 'block'; 
 				e.preventDefault();
+			} else if (!telephoneRegexStart.test(telephoneInput.value)) {
+				let telephoneStartError = document.getElementById('telephoneStartError');
+				telephoneStartError.style.display = 'block';
+				e.preventDefault();
 			} else {
 				let telephoneFormatError= document.getElementById('telephoneFormatError');
 				telephoneFormatError.style.display = 'none'; 				
@@ -500,7 +515,6 @@
 				
 			} 
 
-
 			if( naissanceInput.value.trim()==="") {
 				let naissanceError= document.getElementById('naissanceError');
 				naissanceError.style.display = 'block'; 
@@ -514,6 +528,10 @@
 			} 
 		});
 	</script>
+
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+	{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 	</body>
 </html>

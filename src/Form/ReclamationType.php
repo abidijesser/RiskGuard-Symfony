@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ReclamationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options ): void
     {
         $builder
             ->add('id_reclamation', HiddenType::class) // Add this line to include the id field

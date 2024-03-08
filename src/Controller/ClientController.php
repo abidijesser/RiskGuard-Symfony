@@ -18,6 +18,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use MercurySeries\FlashyBundle\MercurySeriesFlashyBundle;
+
 
 
 class ClientController extends AbstractController
@@ -31,7 +33,7 @@ class ClientController extends AbstractController
     }
 
     #[Route('/client/update/{id}', name: 'client_update')]
-    public function update(Request $request, ManagerRegistry $doctrine, int $id): Response
+    public function update(Request $request, ManagerRegistry $doctrine, int $id, FlashyNotifier $flashy): Response
     {
         $entityManager = $doctrine->getManager();
         $client= $entityManager->getRepository(Client::class)->find($id);
@@ -41,6 +43,13 @@ class ClientController extends AbstractController
             );
         }
 
+        $currentNom = $client->getNom();
+        $currentPrenom = $client->getPrenom();
+        $currentCin = $client->getCin();
+        $currentEmail = $client->getEmail();
+        $currentTelephone = $client->getTelephone();
+        $currentAdresseDomicile = $client->getAdresseDomicile();
+
         $nom = $request->request->get('nom');
         $prenom = $request->request->get('prenom');
         $cin = $request->request->get('cin');
@@ -48,13 +57,14 @@ class ClientController extends AbstractController
         $telephone = $request->request->get('telephone');
         $adresse_domicile = $request->request->get('adresse_domicile');
 
-        $client->setNom($nom);
-        $client->setPrenom($prenom);
-        $client->setCin($cin);
-        $client->setEmail($email);
-        $client->setTelephone($telephone);
-        $client->setAdresseDomicile($adresse_domicile);
+        $client->setNom($nom ? $nom : $currentNom);
+        $client->setPrenom($prenom ? $prenom : $currentPrenom);
+        $client->setCin($cin ? $cin : $currentCin);
+        $client->setEmail($email ? $email : $currentEmail);
+        $client->setTelephone($telephone ? $telephone : $currentTelephone);
+        $client->setAdresseDomicile($adresse_domicile ? $adresse_domicile : $currentAdresseDomicile);
         $entityManager->flush();
+        $flashy->success('Cet email existe déjà.');
 
         return $this->redirectToRoute('show_client', ['id'=>$id]);
     }

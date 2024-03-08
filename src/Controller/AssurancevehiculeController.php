@@ -60,7 +60,7 @@ class AssurancevehiculeController extends AbstractController
 
         return $this->render('assurancevehicule/new.html.twig', [
             'assurancevehicule' => $assurancevehicule,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
     #[Route('/newfront', name: 'app_assurancevehicule_newfront', methods: ['GET', 'POST'])]
@@ -135,7 +135,7 @@ public function showcc(Assurancevehicule $assurancevehicule): Response
 
         return $this->render('assurancevehicule/edit.html.twig', [
             'assurancevehicule' => $assurancevehicule,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

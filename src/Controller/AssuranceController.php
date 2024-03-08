@@ -94,7 +94,7 @@ class AssuranceController extends AbstractController
 
         return $this->render('assurance/new.html.twig', [
             'assurance' => $assurance,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
     #[Route('/neww', name: 'app_assurance_newf', methods: ['GET', 'POST'])]
@@ -113,7 +113,7 @@ class AssuranceController extends AbstractController
 
         return $this->render('assurance/newff.html.twig', [
             'assurance' => $assurance,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -211,7 +211,7 @@ public function showfront(Assurance $assurance): Response
 
         return $this->render('assurance/editfront.html.twig', [
             'assurance' => $assurance,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
