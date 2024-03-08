@@ -80,7 +80,7 @@ class ClientController extends AbstractController
             );
         }
         $entityManager->remove($client);
-        $entityManager->flush();
+
 
         return $this->redirectToRoute('client_allshow');
     }
