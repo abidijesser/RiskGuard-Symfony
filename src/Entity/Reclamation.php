@@ -34,6 +34,19 @@ class Reclamation
     #[Assert\NotBlank(message: "Le numéro de téléphone ne peut pas être vide")]
     private ?string $num_tel = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?string $etat): void
+    {
+        $this->etat = $etat;
+    }
+
 
     public function getIdReclamation(): ?int
     {

@@ -22,12 +22,12 @@ use Dompdf\Dompdf;
 class ReponseController extends AbstractController
 {
     // Injecter le service SmsGenerator dans le contrôleur
-    private $smsGenerator;
+    // private $smsGenerator;
 
-    public function __construct(SmsGenerator $smsGenerator)
-    {
-        $this->smsGenerator = $smsGenerator;
-    }
+    // public function __construct(SmsGenerator $smsGenerator)
+    // {
+    //     $this->smsGenerator = $smsGenerator;
+    // }
 
     #[Route('/addReponse/{id_reclamation}', name: 'addReponse')]
     public function addReponse(Request $request, $id_reclamation, MailerInterface $mailer): Response
@@ -50,16 +50,17 @@ class ReponseController extends AbstractController
             // Ici, nous supposons que le formulaire contient un champ 'reclamation' qui représente l'entité Reclamation
             $reclamation = $reponse->getReclamation();
             $reponse->setReclamation($reclamation);
-
+            // Définir l'état de la réclamation sur "réponse effectuée"
+            $reclamation->setEtat('réponse effectué');
             // Persister la réponse
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reponse);
             $entityManager->flush();
             // Envoi du SMS au client
-            $clientNumber = $reponse->getNumTel();
-            $clientName = $reponse->getNomClient();
-            $message = 'Votre réclamation a été répondue. Consultez la réponse sur notre plateforme.';
-            $this->smsGenerator->sendSms($clientNumber, $clientName, $message);
+            // $clientNumber = $reponse->getNumTel();
+            // $clientName = $reponse->getNomClient();
+            // $message = 'Votre réclamation a été répondue. Consultez la réponse sur notre plateforme.';
+            // $this->smsGenerator->sendSms($clientNumber, $clientName, $message);
             // Envoi d'un email au client pour lui indiquer qu'une réponse a été ajoutée à sa réclamation
             $clientName = $reponse->getNomClient();
             $clientEmail = $reponse->getEmailClient();

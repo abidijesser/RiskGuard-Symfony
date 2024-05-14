@@ -38,7 +38,6 @@ class ReclamationController extends AbstractController
     {
         $reclamation = new Reclamation();
         $form = $this->createForm(ReclamationType::class, $reclamation);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,6 +45,8 @@ class ReclamationController extends AbstractController
             if ($profanityChecker->containsProfanity($content)) {
                 $this->addFlash('error', 'Votre réclamation contient des mots offensives. Veuillez reformuler votre message.');
             } else {
+                // Définir l'état sur "en attente"
+                $reclamation->setEtat('en attente');
                 // Persister la réclamation
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($reclamation);
